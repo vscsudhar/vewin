@@ -1,0 +1,4 @@
+enum BusyObjects {
+  isLogin,
+  studentDetails,
+}
