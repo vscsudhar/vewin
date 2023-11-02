@@ -32,15 +32,15 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> pickImage() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       _image = File(pickedImage.path);
       notifyListeners();
     }
-        _sharedPreference.setString('image', pickedImage?.path ?? '');
-
+    _sharedPreference.setString('image', pickedImage?.path ?? '');
   }
 
-
+  
 }

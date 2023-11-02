@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
-import 'package:vewin/ui/views/customer_list/widgets/app_customer_list.dart';
 import 'package:vewin/ui/views/sales/sales_viewmodel.dart';
 
 class SalesDetailsList extends ViewModelWidget<SalesViewModel> {
   const SalesDetailsList({
-    // required this.data,
+    required this.data,
     // required this.index,
     super.key,
   });
 
-  // final Datum data;
+  final Totalsale data;
   // final int index;
   @override
   Widget build(BuildContext context, SalesViewModel viewModel) {
@@ -37,7 +37,7 @@ class SalesDetailsList extends ViewModelWidget<SalesViewModel> {
                     Padding(
                       padding: defaultPadding8,
                       child: Text(
-                        'Application ',
+                        viewModel.appname.toString(),
                         style: fontFamilyRegular.size18.appChambray1,
                       ),
                     ),
@@ -46,7 +46,8 @@ class SalesDetailsList extends ViewModelWidget<SalesViewModel> {
                     Padding(
                       padding: defaultPadding8,
                       child: Text(
-                        'Sales Amount',
+                        '',
+                        // data.sales.toString(),
                         style: fontFamilyRegular.size18.appChambray1,
                       ),
                     )

@@ -56,7 +56,7 @@ class ForgotPasswordViewModel extends BaseViewModel with NavigationMixin {
         await runBusyFuture(_apiService.forPass(forgotPasswordRequest))
             .catchError((err) {
       print(err);
-      showErrDialog('Failed try Again Later');
+      showErrDialog('your Not Active Please try again After Active');
       return err;
     });
     if (!hasError) {

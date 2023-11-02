@@ -32,7 +32,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  width: screenWidth, // Use screenWidth instead of double.infinity
+                  width:
+                      screenWidth, // Use screenWidth instead of double.infinity
                   height: 200,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(

@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/box.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/views/dashboard/widget/carousel.dart';
 import 'package:vewin/ui/views/dashboard/widget/drawer.dart';
 import 'package:vewin/ui/views/dashboard/widget/text_carousel.dart';
@@ -10,7 +11,8 @@ import 'package:vewin/ui/views/dashboard/widget/text_carousel.dart';
 import 'dashboard_viewmodel.dart';
 
 class DashboardView extends StackedView<DashboardViewModel> {
-  const DashboardView({Key? key}) : super(key: key);
+  const DashboardView(
+   {Key? key}) : super(key: key);
 
   @override
   Widget builder(
@@ -45,12 +47,12 @@ class DashboardView extends StackedView<DashboardViewModel> {
         centerTitle: true,
         backgroundColor: appcolororenge,
       ),
-      body: !viewModel.isBusy ?
-      SingleChildScrollView(
+      body: !viewModel.isBusy
+          ? SingleChildScrollView(
               child: Padding(
                 padding: defaultPadding12,
                 child: Column(children: [
-                  const TextHeaderCarousel(),
+                  TextHeaderCarousel(),
                   // Box(
                   //   boxColor: const Color(0xFF571E90),
                   //   child: Column(
@@ -94,7 +96,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                   height: 60,
                                 ),
                                 Text(
-                                  '10000',
+                                  '${viewModel.total}',
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -122,8 +124,9 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  "Karthi",
-                                  style: fontFamilyBold.size18,
+                                  '${viewModel.bestperformName}',
+                                  // viewModel.bestperformName.toString(),
+                                  style: fontFamilyBold.size14,
                                   textAlign: TextAlign.center,
                                 ),
                               ],
@@ -154,7 +157,8 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                   height: 60,
                                 ),
                                 Text(
-                                  '45',
+                                  '${viewModel.customerApptotal}',
+                                  // viewModel.customerApptotal.toString(),
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -182,7 +186,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  "300000",
+                                  "[300000]",
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -194,13 +198,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                 ]),
               ),
             )
-          : SkeletonLoader(
-              loading: false,
-              child: Container(
-                width: 200,
-                height: 200,
-                color: appcolororenge,
-              )),
+          : Center(child: AnimatedCircularProgressIndicator()),
       drawer: const DrawerView(),
     );
   }

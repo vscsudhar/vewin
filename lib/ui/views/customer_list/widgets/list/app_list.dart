@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/views/customer_list/customer_list_viewmodel.dart';
 import 'package:vewin/ui/views/customer_list/widgets/app_customer_list.dart';
 
@@ -16,9 +17,11 @@ class AppList extends ViewModelWidget<CustomerListViewModel> {
   // final int index;
   @override
   Widget build(BuildContext context, CustomerListViewModel viewModel) {
-    return Padding(
+    return 
+    Padding(
       padding: defaultPadding12,
-      child: Container(
+      child: !viewModel.isBusy ?
+      Container(
         height: 70, //150
         decoration: BoxDecoration(
           color: appChambray,
@@ -60,7 +63,7 @@ class AppList extends ViewModelWidget<CustomerListViewModel> {
             ),
           ),
         ),
-      ),
+      ) : AnimatedCircularProgressIndicator(),
     );
   }
 }

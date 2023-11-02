@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field2.dart';
 
 import 'set_password_viewmodel.dart';
@@ -29,7 +30,8 @@ class SetPasswordView extends StackedView<SetPasswordViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
+        body: !viewModel.isBusy ?
+         SingleChildScrollView(
           child: Form(
             key: formKey,
             child: Column(
@@ -58,7 +60,8 @@ class SetPasswordView extends StackedView<SetPasswordViewModel> {
               ],
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

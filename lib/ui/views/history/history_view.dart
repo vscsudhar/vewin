@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/dialogs/bottom_sheet.dart';
 
 import 'history_viewmodel.dart';
@@ -19,7 +20,7 @@ class HistoryView extends StackedView<HistoryViewModel> {
       backgroundColor: appwhite1,
       appBar: AppBar(
         leading: InkWell(
-          onTap: () => viewModel.goToWalletInfo(),
+          onTap: () => Navigator.pop(context),
           child: const Icon(Icons.arrow_back),
         ),
         title: Text(
@@ -29,7 +30,8 @@ class HistoryView extends StackedView<HistoryViewModel> {
         backgroundColor: appcolororenge,
         centerTitle: true,
       ),
-      body: Padding(
+      body: !viewModel.isBusy ? 
+      Padding(
         padding: defaultPadding12,
         child: Stack(children: [
           Row(
@@ -114,7 +116,7 @@ class HistoryView extends StackedView<HistoryViewModel> {
             ),
           )
         ]),
-      ),
+      ) : AnimatedCircularProgressIndicator()
     );
   }
 

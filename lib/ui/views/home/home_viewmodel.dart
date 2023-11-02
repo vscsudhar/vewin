@@ -24,15 +24,19 @@ class HomeViewModel extends BaseViewModel with NavigationMixin {
   String get password => _password ?? '';
 
   void userLogin() async {
-    setBusy(true);
-    notifyListeners();
-    await _userAuthenticationService.login(mobile, password);
-    setBusy(false);
-    final token = _userAuthenticationService.loginResponse.token;
-    if (token != null) {
-      _sharedPreference.setString('token', token);
-    } else {
-      showErrDialog('login failed');
+    if (mobile.length == 10) {
+        setBusy(true);
+        notifyListeners();
+        await _userAuthenticationService.login(mobile, password);
+        setBusy(false);
+        final token = _userAuthenticationService.loginResponse.token;
+        if (token != null) {
+          _sharedPreference.setString('token', token);
+        } else {
+          showErrDialog('login failed');
+        }
+      } else {
+        showErrDialog('Please Check Your Mobile Number (or) it should be 10 digit');
     }
   }
 
@@ -44,6 +48,7 @@ class HomeViewModel extends BaseViewModel with NavigationMixin {
     _mobile = mobile;
     notifyListeners();
   }
+
   void setPass(String password) {
     _password = password;
     notifyListeners();

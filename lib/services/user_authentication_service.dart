@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,34 +21,42 @@ class UserAuthenticationService with NavigationMixin {
   String get token => _loginResponse?.token ?? 'Empty token';
   String get userCredentials => _sharedPreference.getString('mobile') ?? '';
 
-    LoginResponse get loginResponse => _loginResponse ?? LoginResponse();
-
+  LoginResponse get loginResponse => _loginResponse ?? LoginResponse();
 
   Future<dynamic> login(String mobile, String password) async {
-    _loginResponse = await locator<ApiService>().login(mobile, password).catchError((e) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: e.toString());
+    _loginResponse =
+        await locator<ApiService>().login(mobile, password).catchError((e) {
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: 'Login Faild Maybe user or password Incorrect');
       return e;
     });
     _sharedPreference.setString('mobile', mobile ?? '');
     _sharedPreference.setString('password', password ?? '');
     if (_loginResponse?.token != null) {
       log('token : ' + (_loginResponse?.token ?? ''));
-      _sharedPreference.setString('name', _loginResponse?.dashboard?.name ?? '');
-      _sharedPreference.setString('id', _loginResponse?.dashboard?.id.toString() ?? '');
-      // _sharedPreference.setString('annoncement', json.encode(_loginResponse?.annoncement));
-      _sharedPreference.setString('usertype', _loginResponse?.dashboard?.userType ?? '');
-      _sharedPreference.setString('mobile', _loginResponse?.dashboard?.mobile ?? '');
-      _sharedPreference.setString('photo', _loginResponse?.dashboard?.photo ?? '');
+      _sharedPreference.setString(
+          'name', _loginResponse?.dashboard?.name ?? '');
+      _sharedPreference.setString(
+          'id', _loginResponse?.dashboard?.id.toString() ?? '');
+      _sharedPreference.setString(
+          'annoncement', json.encode(_loginResponse?.dashboard?.announcements));
+      _sharedPreference.setString(
+          'usertype', _loginResponse?.dashboard?.userType ?? '');
+      _sharedPreference.setString(
+          'mobile', _loginResponse?.dashboard?.mobile ?? '');
+      _sharedPreference.setString(
+          'photo', _loginResponse?.dashboard?.photo ?? '');
       goToDashboard();
     } else {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Login Failed');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: 'Login Failed');
     }
   }
-  
+
   Future<void> refreshSession() async {
     String mobile = _sharedPreference.getString('mobile') ?? '';
     String password = _sharedPreference.getString('password') ?? '';
 
-    await login(mobile , password);
+    await login(mobile, password);
   }
 }

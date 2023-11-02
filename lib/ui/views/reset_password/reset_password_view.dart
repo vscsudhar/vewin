@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field1.dart';
 
 import 'reset_password_viewmodel.dart';
@@ -28,7 +29,8 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
+        body: !viewModel.isBusy ? 
+        SingleChildScrollView(
           child: Form(
             key: formKey,
             child: Column(
@@ -40,32 +42,47 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
                   obscureText: true,
                   hintStyle: fontFamilyMedium,
                   color: appChambray,
-                  validator: (val) => val == null || val.isEmpty ? 'pass is required' : null,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Password is required';
+                    } else if (val.length < 8) {
+                      return 'Password must be at least 8 characters long';
+                    }
+                    return null;
+                  },
                   onSaved: (password) => viewModel.setpass(password.toString()),
                   onChanged: (password) => viewModel.updatePasswordRequest.password = password,
                 ),
                 verticalSpacing12,
                 TextField1(
                   color: appChambray,
-                    hintText: 'Confirm Password',
-                    hintStyle: fontFamilyMedium,
-                    validator: (val) => val == null || val.isEmpty ? 'Re-Type pass is required' : null,
-                    onSaved: (repass) => viewModel.confirmpass(repass.toString()),
-                    ),
+                  hintText: 'Confirm Password',
+                  hintStyle: fontFamilyMedium,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Confirm Password is required';
+                    } else if (val.length < 8) {
+                      return 'Confirm Password must be at least 8 characters long';
+                    }
+                    return null;
+                  },
+                  onSaved: (repass) => viewModel.confirmpass(repass.toString()),
+                ),
                 verticalSpacing12,
                 Button(
                   name: 'Submit',
                   onPressed: () {
-                       if (formKey.currentState?.validate() ?? false) {
-                                formKey.currentState?.save();
-                                viewModel.updatePassword();
-                              }
+                    if (formKey.currentState?.validate() ?? false) {
+                      formKey.currentState?.save();
+                      viewModel.updatePassword();
+                    }
                   },
                 )
               ],
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

@@ -7,9 +7,14 @@ import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:vewin/app/app.locator.dart';
 import 'package:vewin/core/models/bank_acc_add_model.dart';
+import 'package:vewin/core/models/best_performer_model.dart';
+import 'package:vewin/core/models/customer_list_details.dart';
+import 'package:vewin/core/models/customer_list_model.dart';
 import 'package:vewin/core/models/forgot_pass_mobile_otp.dart';
 import 'package:vewin/core/models/forgot_pass_otp_verify.dart';
+import 'package:vewin/core/models/get_sales_details_model.dart';
 import 'package:vewin/core/models/login_response_model.dart';
+import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/core/models/pan_add_model.dart';
 import 'package:vewin/core/models/profile_update_model.dart';
 import 'package:vewin/core/models/regiseter_verified_otp_model.dart';
@@ -64,4 +69,19 @@ abstract class ApiService {
 
   @PUT('/api/User/UpdateUser/{id}')
   Future<ProfileUpdateResponse> updateProfile(@Path('id') String id);
+
+  @GET('/api/Sales/GetSales')
+  Future<MonthlySaleResponse> monthlySaleRes();
+
+  @GET('/api/Sales/GetSalesDetails?Appname={appName}')
+  Future<List<GetSalesDetailsResponse>> getSalesDetails(@Path('appName') String appPick);
+
+  @GET('/api/CustomerList/GetCustomsersCount')
+  Future<CustomerListCountResponse> getCustomerCount();
+
+  @GET('/api/CustomerList/GetCustomsersDetails?Appname={appName}')
+  Future<List<CustomerListDetailsResponse>> getCustomerDetails(@Path('appName') String appPickup);
+
+  @GET('/api/Bestperformer/GetBestperformer')
+  Future<List<BestPerformerResponse>> getBestPerformer();
 }

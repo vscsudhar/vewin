@@ -20,7 +20,8 @@ class SetPasswordViewModel extends BaseViewModel with NavigationMixin {
 
   late ForgotPasswordVerifyResponse _forgotPasswordVerifyResponse;
 
-  ForgotPasswordVerifyResponse get forgotPasswordVerifyResponse => _forgotPasswordVerifyResponse;
+  ForgotPasswordVerifyResponse get forgotPasswordVerifyResponse =>
+      _forgotPasswordVerifyResponse;
 
   DateTime? get modeDate => DateTime.now();
   String? _mobile;
@@ -36,8 +37,12 @@ class SetPasswordViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> sendOtpVerify() async {
     if (otp == otp1) {
-      _forgotPasswordVerifyResponse = await runBusyFuture(_apiService.forVerifyOtp(mobile1, otp1.toString())).catchError((err) {
-        _dialogService.showCustomDialog(variant: DialogType.error, description: err.toString() ?? 'Something went wrong');
+      _forgotPasswordVerifyResponse = await runBusyFuture(
+              _apiService.forVerifyOtp(mobile1, otp1.toString()))
+          .catchError((err) {
+        _dialogService.showCustomDialog(
+            variant: DialogType.error,
+            description: err.toString() ?? 'Something went wrong');
       });
       if (forgotPasswordVerifyResponse.statusCode == 200) {
         goToResetPass();
@@ -56,6 +61,7 @@ class SetPasswordViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 }

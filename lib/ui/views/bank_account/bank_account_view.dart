@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field1.dart';
 
 import 'bank_account_viewmodel.dart';
@@ -23,7 +24,7 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
         backgroundColor: appwhite1,
         appBar: AppBar(
           leading: InkWell(
-            onTap: () => viewModel.goToWalletInfo(),
+            onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back),
           ),
           title: Text(
@@ -33,7 +34,8 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: Padding(
+        body: !viewModel.isBusy ?
+        Padding(
           padding: defaultPadding12,
           child: SingleChildScrollView(
             child: Form(
@@ -44,9 +46,13 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'Account Number',
-                    validator: (val) => val == null || val.isEmpty ? 'Account Number is required' : null,
-                    onSaved: (account) => viewModel.bankAccountAddRequest.accNo = account,
-                    onChanged: (account) => viewModel.bankAccountAddRequest.accNo = account,
+                    validator: (val) => val == null || val.isEmpty
+                        ? 'Account Number is required'
+                        : null,
+                    onSaved: (account) =>
+                        viewModel.bankAccountAddRequest.accNo = account,
+                    onChanged: (account) =>
+                        viewModel.bankAccountAddRequest.accNo = account,
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
                   Row(
@@ -62,7 +68,9 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'Re-Type Account Number ',
-                    validator: (val) => val == null || val.isEmpty ? 'Re-Type Account Number is required' : null,
+                    validator: (val) => val == null || val.isEmpty
+                        ? 'Re-Type Account Number is required'
+                        : null,
                     onSaved: (acc) => viewModel.confirmAcc(acc.toString()),
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
@@ -79,9 +87,12 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'IFSC Code',
-                    validator: (val) => val == null || val.isEmpty ? 'IFSC is required' : null,
-                    onSaved: (ifsc) => viewModel.bankAccountAddRequest.ifsc = ifsc,
-                    onChanged: (ifsc) => viewModel.bankAccountAddRequest.ifsc = ifsc,
+                    validator: (val) =>
+                        val == null || val.isEmpty ? 'IFSC is required' : null,
+                    onSaved: (ifsc) =>
+                        viewModel.bankAccountAddRequest.ifsc = ifsc,
+                    onChanged: (ifsc) =>
+                        viewModel.bankAccountAddRequest.ifsc = ifsc,
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
                   Row(
@@ -97,9 +108,13 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'Bank Name',
-                    validator: (val) => val == null || val.isEmpty ? 'Bank Name is required' : null,
-                    onSaved: (bankname) => viewModel.bankAccountAddRequest.bank = bankname,
-                    onChanged: (bankname) => viewModel.bankAccountAddRequest.bank = bankname,
+                    validator: (val) => val == null || val.isEmpty
+                        ? 'Bank Name is required'
+                        : null,
+                    onSaved: (bankname) =>
+                        viewModel.bankAccountAddRequest.bank = bankname,
+                    onChanged: (bankname) =>
+                        viewModel.bankAccountAddRequest.bank = bankname,
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
                   Row(
@@ -115,9 +130,13 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'Branch Name',
-                    validator: (val) => val == null || val.isEmpty ? 'Branch Name is required' : null,
-                    onSaved: (branch) => viewModel.bankAccountAddRequest.branch = branch,
-                    onChanged: (branch) => viewModel.bankAccountAddRequest.branch = branch,
+                    validator: (val) => val == null || val.isEmpty
+                        ? 'Branch Name is required'
+                        : null,
+                    onSaved: (branch) =>
+                        viewModel.bankAccountAddRequest.branch = branch,
+                    onChanged: (branch) =>
+                        viewModel.bankAccountAddRequest.branch = branch,
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
                   Row(
@@ -133,9 +152,12 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
                   TextField1(
                     color: appChambray,
                     hintText: 'State',
-                    validator: (val) => val == null || val.isEmpty ? 'State is required' : null,
-                    onSaved: (state) => viewModel.bankAccountAddRequest.state = state,
-                    onChanged: (state) => viewModel.bankAccountAddRequest.state = state,
+                    validator: (val) =>
+                        val == null || val.isEmpty ? 'State is required' : null,
+                    onSaved: (state) =>
+                        viewModel.bankAccountAddRequest.state = state,
+                    onChanged: (state) =>
+                        viewModel.bankAccountAddRequest.state = state,
                     onFieldSubmitted: (val) => formKey.currentState?.reset(),
                   ),
                   Row(
@@ -162,7 +184,8 @@ class BankAccountView extends StackedView<BankAccountViewModel> {
               ),
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

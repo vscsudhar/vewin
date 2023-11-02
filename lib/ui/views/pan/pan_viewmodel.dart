@@ -54,7 +54,9 @@ class PanViewModel extends BaseViewModel with NavigationMixin {
     panAddRequest.modifiedby = 'user';
     panAddRequest.modifiedon = DateTime.now();
     panAddRequest.pan = pan;
-    final panNoAddResponse = await runBusyFuture(_apiService.panAdd(panAddRequest)).catchError((err) {
+    final panNoAddResponse =
+        await runBusyFuture(_apiService.panAdd(panAddRequest))
+            .catchError((err) {
       print(err);
       _dialogService.showDialog(title: 'Error', description: 'PAN Add Failed');
     });
@@ -66,7 +68,8 @@ class PanViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 
   void panlength(String pan) {

@@ -5,10 +5,12 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i19;
+import 'package:flutter/material.dart' as _i21;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i20;
+import 'package:stacked_services/stacked_services.dart' as _i22;
+import 'package:vewin/ui/views/app_customer_list/app_customer_list_view.dart'
+    as _i20;
 import 'package:vewin/ui/views/bank_account/bank_account_view.dart' as _i13;
 import 'package:vewin/ui/views/best_performer/best_performer_view.dart' as _i9;
 import 'package:vewin/ui/views/change_password/change_password_view.dart'
@@ -17,6 +19,8 @@ import 'package:vewin/ui/views/customer_list/customer_list_view.dart' as _i10;
 import 'package:vewin/ui/views/dashboard/dashboard_view.dart' as _i5;
 import 'package:vewin/ui/views/forgot_password/forgot_password_view.dart'
     as _i16;
+import 'package:vewin/ui/views/get_sales_details/get_sales_details_view.dart'
+    as _i19;
 import 'package:vewin/ui/views/history/history_view.dart' as _i14;
 import 'package:vewin/ui/views/home/home_view.dart' as _i2;
 import 'package:vewin/ui/views/otp/otp_view.dart' as _i15;
@@ -64,6 +68,10 @@ class Routes {
 
   static const setPasswordView = '/set-password-view';
 
+  static const getSalesDetailsView = '/get-sales-details-view';
+
+  static const appCustomerListView = '/app-customer-list-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -82,6 +90,8 @@ class Routes {
     forgotPasswordView,
     resetPasswordView,
     setPasswordView,
+    getSalesDetailsView,
+    appCustomerListView,
   };
 }
 
@@ -155,108 +165,128 @@ class StackedRouter extends _i1.RouterBase {
       Routes.setPasswordView,
       page: _i18.SetPasswordView,
     ),
+    _i1.RouteDef(
+      Routes.getSalesDetailsView,
+      page: _i19.GetSalesDetailsView,
+    ),
+    _i1.RouteDef(
+      Routes.appCustomerListView,
+      page: _i20.AppCustomerListView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.RegisterView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.RegisterView(),
         settings: data,
       );
     },
     _i5.DashboardView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.DashboardView(),
         settings: data,
       );
     },
     _i6.ChangePasswordView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ChangePasswordView(),
         settings: data,
       );
     },
     _i7.ProfileView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ProfileView(),
         settings: data,
       );
     },
     _i8.SalesView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.SalesView(),
         settings: data,
       );
     },
     _i9.BestPerformerView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.BestPerformerView(),
         settings: data,
       );
     },
     _i10.CustomerListView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.CustomerListView(),
         settings: data,
       );
     },
     _i11.WalletInfoView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.WalletInfoView(),
         settings: data,
       );
     },
     _i12.PanView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.PanView(),
         settings: data,
       );
     },
     _i13.BankAccountView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.BankAccountView(),
         settings: data,
       );
     },
     _i14.HistoryView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.HistoryView(),
         settings: data,
       );
     },
     _i15.OtpView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.OtpView(),
         settings: data,
       );
     },
     _i16.ForgotPasswordView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.ForgotPasswordView(),
         settings: data,
       );
     },
     _i17.ResetPasswordView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.ResetPasswordView(),
         settings: data,
       );
     },
     _i18.SetPasswordView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.SetPasswordView(),
+        settings: data,
+      );
+    },
+    _i19.GetSalesDetailsView: (data) {
+      return _i21.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i19.GetSalesDetailsView(),
+        settings: data,
+      );
+    },
+    _i20.AppCustomerListView: (data) {
+      return _i21.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i20.AppCustomerListView(),
         settings: data,
       );
     },
@@ -269,7 +299,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i20.NavigationService {
+extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -508,6 +538,34 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToGetSalesDetailsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.getSalesDetailsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAppCustomerListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.appCustomerListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -740,6 +798,34 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.setPasswordView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithGetSalesDetailsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.getSalesDetailsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAppCustomerListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.appCustomerListView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

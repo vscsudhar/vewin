@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/views/customer_list/customer_list_viewmodel.dart';
 import 'package:vewin/ui/views/customer_list/widgets/list/customer_list.dart';
 
@@ -24,11 +25,10 @@ class AppCustomerList extends StackedView<CustomerListViewModel> {
         backgroundColor: appcolororenge,
         elevation: 0,
         centerTitle: true,
-        leading: InkWell(
-            onTap: () => viewModel.goToCustomerList(),
-            child: const Icon(Icons.arrow_back)),
+        leading: InkWell(onTap: () => Navigator.pop(context), child: const Icon(Icons.arrow_back)),
       ),
-      body: SingleChildScrollView(
+      body: !viewModel.isBusy ?
+       SingleChildScrollView(
         child: Padding(
           padding: defaultPadding12,
           child: Column(
@@ -69,7 +69,7 @@ class AppCustomerList extends StackedView<CustomerListViewModel> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ListView.separated(
-                          itemBuilder: (context, index) => const CustomerList(),
+                          itemBuilder: (context, index) => const Text(''), //const CustomerList(),
                           separatorBuilder: (context, index) => verticalDivider,
                           itemCount: 15,
                         ),
@@ -81,7 +81,7 @@ class AppCustomerList extends StackedView<CustomerListViewModel> {
             ],
           ),
         ),
-      ),
+      ) : AnimatedCircularProgressIndicator(),
     );
   }
 

@@ -43,9 +43,17 @@ class HomeView extends StackedView<HomeViewModel> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField1(
+                          type: TextInputType.number,
                           hintText: 'Phone NO',
                           color: appChambray,
-                          validator: (val) => val == null || val.isEmpty ? 'mobile is required' : null,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Phone Number is required';
+                            } else if (!RegExp(r'^[0-9]{10}$').hasMatch(val)) {
+                              return 'Please enter a 10-digit number';
+                            }
+                            return null;
+                          },
                           onSaved: (mobile) => viewModel.setMobile(mobile.toString()),
                         ),
                       ),
@@ -53,9 +61,17 @@ class HomeView extends StackedView<HomeViewModel> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField1(
+                          obscureText: true,
                           color: appChambray,
                           hintText: "Password",
-                          validator: (val) => val == null || val.isEmpty ? 'mobile is required' : null,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Password is required';
+                            } else if (val.length < 8) {
+                              return 'Password must be at least 8 characters long';
+                            }
+                            return null;
+                          },
                           onSaved: (password) => viewModel.setPass(password.toString()),
                         ),
                       ),

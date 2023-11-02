@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/box.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/views/wallet_info/widgets/kyc/kyc_details.dart';
 
 import 'wallet_info_viewmodel.dart';
@@ -30,7 +31,7 @@ class WalletInfoView extends StackedView<WalletInfoViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
+        body: !viewModel.isBusy ? SingleChildScrollView(
           child: Column(
             children: [
               verticalSpacing20,
@@ -150,7 +151,8 @@ class WalletInfoView extends StackedView<WalletInfoViewModel> {
               ),
             ],
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

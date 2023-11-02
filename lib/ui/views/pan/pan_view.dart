@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field1.dart';
 
 import 'pan_viewmodel.dart';
@@ -34,7 +35,8 @@ class PanView extends StackedView<PanViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: Padding(
+        body: !viewModel.isBusy ? 
+        Padding(
           padding: defaultPadding12,
           child: Form(
             key: formKey,
@@ -45,7 +47,9 @@ class PanView extends StackedView<PanViewModel> {
                   hintText: 'Name',
                   color: appChambray,
                   hintStyle: fontFamilyRegular,
-                  validator: (val) => val == null || val.isEmpty ? 'Password is required' : null,
+                  validator: (val) => val == null || val.isEmpty
+                      ? 'Password is required'
+                      : null,
                   onSaved: (name) => viewModel.panAddRequest.name = name,
                   onChanged: (name) => viewModel.panAddRequest.name = name,
                 ),
@@ -63,8 +67,10 @@ class PanView extends StackedView<PanViewModel> {
                   hintText: 'PAN ',
                   color: appChambray,
                   hintStyle: fontFamilyRegular,
-                  validator: (val) => val == null || val.isEmpty ? 'PAN is required' : null,
-                  onSaved: (pan) => viewModel.panlength(pan.toString()), //viewModel.panAddRequest.pan = pan,
+                  validator: (val) =>
+                      val == null || val.isEmpty ? 'PAN is required' : null,
+                  onSaved: (pan) => viewModel.panlength(
+                      pan.toString()), //viewModel.panAddRequest.pan = pan,
                   // onChanged: (pan) => viewModel.panlength(pan.toString()),
                 ),
                 Row(
@@ -87,7 +93,10 @@ class PanView extends StackedView<PanViewModel> {
                       borderRadius: BorderRadius.circular(
                         15,
                       ),
-                      border: Border.all(width: 0.6, style: BorderStyle.solid, strokeAlign: BorderSide.strokeAlignOutside),
+                      border: Border.all(
+                          width: 0.6,
+                          style: BorderStyle.solid,
+                          strokeAlign: BorderSide.strokeAlignOutside),
                       // boxShadow: const <BoxShadow>[
                       //   BoxShadow(
                       //     color: Color.fromRGBO(0, 0, 0, 0.4),
@@ -128,7 +137,8 @@ class PanView extends StackedView<PanViewModel> {
               ],
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator()
+        );
   }
 
   @override

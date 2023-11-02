@@ -47,9 +47,12 @@ class BankAccountViewModel extends BaseViewModel with NavigationMixin {
     bankAccountAddRequest.modifiedby = 'user';
     bankAccountAddRequest.modifiedon = DateTime.now();
     if (bankAccountAddRequest.accNo == confirmacc) {
-      final bankAccountAddResponse = await runBusyFuture(_apiService.addBank(bankAccountAddRequest)).catchError((err) {
+      final bankAccountAddResponse =
+          await runBusyFuture(_apiService.addBank(bankAccountAddRequest))
+              .catchError((err) {
         log(err);
-        _dialogService.showCustomDialog(variant: error, title: 'Error', description: err.toString());
+        _dialogService.showCustomDialog(
+            variant: error, title: 'Error', description: err.toString());
       });
       if (bankAccountAddResponse.statusCode == 200) {
         goToWalletInfo();
@@ -63,7 +66,8 @@ class BankAccountViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 
   void confirmAcc(String confirmaccNo) {

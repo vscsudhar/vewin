@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:stacked/stacked.dart';
-import 'package:vewin/core/models/register_model.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field2.dart';
 
 import 'otp_viewmodel.dart';
@@ -34,7 +33,8 @@ class OtpView extends StackedView<OtpViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
+        body: !viewModel.isBusy ? 
+        SingleChildScrollView(
           child: Padding(
             padding: defaultPadding12,
             child: Form(
@@ -48,8 +48,7 @@ class OtpView extends StackedView<OtpViewModel> {
                     maxLength: 4,
                     hintText: 'OTP',
                     hintStyle: fontFamilyRegular,
-                    validator: (val) =>
-                        val == null || val.isEmpty ? 'OTP is required' : null,
+                    validator: (val) => val == null || val.isEmpty ? 'OTP is required' : null,
                     onSaved: (otp) => viewModel.setOtp(otp.toString()),
                   ),
                   // OtpTextField(
@@ -59,21 +58,21 @@ class OtpView extends StackedView<OtpViewModel> {
                   //           viewModel.setOtp(otp.toString()),
                   //   onCodeChanged: (value) => value != viewModel.otp || value.isEmpty ? 'Please Enter verified Otp' : null,
                   // ),
-                  verticalSpacing10,
+                  verticalSpacing20,
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text(
-                        'Your Not get OTP Please Click',
-                        style: fontFamilyMedium,
-                      ),
-                      const Spacer(),
+                      // const Text(
+                      //   '',
+                      //   style: fontFamilyMedium,
+                      // ),
                       Text(
-                        ' Resend OTP',
-                        style: fontFamilyMedium.color2699FB,
+                        'Resend OTP',
+                        style: fontFamilyMedium.appViking1,
                       )
                     ],
                   ),
-                  verticalSpacing40,
+                  verticalSpacing20,
                   Button(
                       buttoncolor: Colors.green,
                       name: 'Verified',
@@ -85,6 +84,7 @@ class OtpView extends StackedView<OtpViewModel> {
                       }),
                   verticalSpacing60,
                   TextField2(
+                    textAlign: TextAlign.center,
                     readOnly: true,
                     hintText: viewModel.otp,
                   )
@@ -92,7 +92,8 @@ class OtpView extends StackedView<OtpViewModel> {
               ),
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field1.dart';
 
 import 'change_password_viewmodel.dart';
@@ -20,7 +21,8 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
   ) {
     return Scaffold(
         backgroundColor: appwhite1,
-        body: SingleChildScrollView(
+        body: !viewModel.isBusy ? 
+        SingleChildScrollView(
           child: Padding(
             padding: defaultPadding12,
             child: SafeArea(
@@ -45,7 +47,14 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
                     TextField1(
                       color: appChambray,
                       hintText: 'New Password',
-                      validator: (val) => val == null || val.isEmpty ? 'New Pass is required' : null,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'Password is required';
+                        } else if (val.length < 8) {
+                          return 'Password must be at least 8 characters long';
+                        }
+                        return null;
+                      },
                       onSaved: (password) => viewModel.updatePasswordRequest.password = password,
                       onChanged: (password) => viewModel.updatePasswordRequest.password = password,
                     ),
@@ -53,7 +62,14 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
                     TextField1(
                       color: appChambray,
                       hintText: 'Confirm Password',
-                      validator: (val) => val == null || val.isEmpty ? 'Re-Type pass is required' : null,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'Confirm Password is required';
+                        } else if (val.length < 8) {
+                          return 'Confirm Password must be at least 8 characters long';
+                        }
+                        return null;
+                      },
                       onSaved: (repass) => viewModel.oldPass1(
                         repass.toString(),
                       ),
@@ -91,7 +107,8 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
               ),
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override

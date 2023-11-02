@@ -13,9 +13,13 @@ mixin NavigationMixin {
       _navigationService.navigateTo(Routes.bestPerformerView);
   void goToChangePassword() =>
       _navigationService.navigateTo(Routes.changePasswordView);
-  void goToDashboard() => _navigationService.clearStackAndShow(Routes.dashboardView);
+  void goToDashboard() =>
+      _navigationService.clearStackAndShow(Routes.dashboardView);
   void goToRegister() => _navigationService.navigateTo(Routes.registerView);
+  void goToGetSalesList() =>
+      _navigationService.navigateTo(Routes.getSalesDetailsView);
   void goToProfile() => _navigationService.navigateTo(Routes.profileView);
+  void goToAppCustomerList() => _navigationService.navigateTo(Routes.appCustomerListView);
   void goToSales() => _navigationService.navigateTo(Routes.salesView);
   void goToPan() => _navigationService.navigateTo(Routes.panView);
   void goToHistory() => _navigationService.navigateTo(Routes.historyView);

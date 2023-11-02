@@ -29,10 +29,17 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
 
   String? _otp;
 
+  String? _password;
+  String? _confirmpass;
+
+  String? get confirmPass => _confirmpass;
+  String? get password => _password;
+
   String? get otp => _otp;
 
   Future<void> registerUser() async {
     print(registerRequest.toJson().toString());
+    registerRequest.password = password;
     registerRequest.id = 0;
     registerRequest.usertype = 'user';
     registerRequest.createdby = 'user';
@@ -42,22 +49,24 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
     registerRequest.createdon = DateTime.now();
     registerRequest.modifiedon = DateTime.now();
     registerRequest.isdeleted = '';
-    final response = await runBusyFuture(_apiService.register(registerRequest))
-        .catchError((error, stackTrace) {
-      print(error);
-      showErrDialog('Register Failed try Again Later');
-      return error;
-    });
-    if (!hasError) {
-      _dialogService.showCustomDialog(
-          title: 'Success', description: response.message);
-      notifyListeners();
-      goToOtpRegister();
+    if (registerRequest.password == confirmPass) {
+      final response = await runBusyFuture(_apiService.register(registerRequest)).catchError((error, stackTrace) {
+        print(error);
+        showErrDialog('Register Failed User Already Register');
+        return error;
+      });
+      if (!hasError) {
+        _dialogService.showCustomDialog(title: 'Message', description: response.message);
+        notifyListeners();
+        goToOtpRegister();
+      } else {
+        showErrDialog(response.message.toString());
+      }
+      _sharedPreference.setString('mobile', registerRequest.mobile ?? '');
+      _sharedPreference.setString('otp', response.otp ?? '');
     } else {
-      showErrDialog(response.message.toString());
+      showErrDialog('Miss Match Re-Type PassWord');
     }
-    _sharedPreference.setString('mobile', registerRequest.mobile ?? '');
-    _sharedPreference.setString('otp', response.otp ?? '');
   }
 
   void passconfirm(context) {
@@ -79,7 +88,16 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+  }
+
+  void setpass(String password) {
+    _password = password;
+    notifyListeners();
+  }
+
+  void confirmpass(String confirmpass) {
+    _confirmpass = confirmpass;
+    notifyListeners();
   }
 }

@@ -4,6 +4,7 @@ import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/button.dart';
 import 'package:vewin/ui/common/widgets/button1.dart';
+import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
 import 'package:vewin/ui/common/widgets/text_field1.dart';
 
 import 'forgot_password_viewmodel.dart';
@@ -23,7 +24,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
         backgroundColor: appwhite1,
         appBar: AppBar(
           leading: InkWell(
-            onTap: () => viewModel.goToLogin(),
+            onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back),
           ),
           title: Text(
@@ -33,7 +34,8 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
           backgroundColor: appcolororenge,
           centerTitle: true,
         ),
-        body: Padding(
+        body: !viewModel.isBusy ? 
+        Padding(
           padding: defaultPadding12,
           child: Form(
             key: formKey,
@@ -47,9 +49,14 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                   hintStyle: fontFamilyMedium.appChambray1.appViking1,
                   type: TextInputType.number,
                   hintText: 'Mobile Number',
-                  validator: (val) => val == null || val.isEmpty
-                      ? 'Mobile Number is required'
-                      : null,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Phone Number is required';
+                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(val)) {
+                      return 'Please enter a 10-digit number';
+                    }
+                    return null;
+                  },
                   onSaved: (mobile) => viewModel.setMobile(mobile.toString()),
                   onChanged: (value) => viewModel.setMobile(value.toString()),
                 ),
@@ -67,7 +74,8 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
               ],
             ),
           ),
-        ));
+        ) : AnimatedCircularProgressIndicator(),
+        );
   }
 
   @override
