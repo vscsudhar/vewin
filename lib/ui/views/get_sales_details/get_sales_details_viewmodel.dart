@@ -31,27 +31,21 @@ class GetSalesDetailsViewModel extends BaseViewModel with NavigationMixin {
   List<GetSalesDetailsResponse> get salesDetails => _getSalesDetailsResponse;
 
   String? get appPick => _sharedPreference.getString('appName') ?? '';
+  String? get id1 => _sharedPreference.getString('id') ?? '';
 
-  List<String> get name =>
-      salesDetails.map((element) => element.name.toString()).toSet().toList();
-  List<String> get id =>
-      salesDetails.map((element) => element.id.toString()).toSet().toList();
-  List<String> get amount =>
-      salesDetails.map((element) => element.amount.toString()).toSet().toList();
-  List<String> get saleDate =>
-      salesDetails.map((element) => element.date.toString()).toSet().toList();
+  List<String> get name => salesDetails.map((element) => element.name.toString()).toSet().toList();
+  List<String> get id => salesDetails.map((element) => element.id.toString()).toSet().toList();
+  List<String> get amount => salesDetails.map((element) => element.amount.toString()).toSet().toList();
+  List<String> get saleDate => salesDetails.map((element) => element.date.toString()).toSet().toList();
 
   Future<void> getSalesDetails() async {
-    _getSalesDetailsResponse =
-        await runBusyFuture(_apiService.getSalesDetails(appPick.toString()))
-            .catchError((err) {});
+    _getSalesDetailsResponse = await runBusyFuture(_apiService.getSalesDetails(appPick.toString(), int.parse(id1.toString()))).catchError((err) {});
     if (hasError) {
       showErrDialog('Something went Wrong');
     } else {}
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
   }
 }

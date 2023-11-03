@@ -279,14 +279,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MonthlySaleResponse> monthlySaleRes() async {
+  Future<MonthlySaleResponse> monthlySaleRes(
+      MonthlySaleRequest monthlySaleRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(monthlySaleRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MonthlySaleResponse>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
@@ -306,7 +308,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<GetSalesDetailsResponse>> getSalesDetails(String appPick) async {
+  Future<List<GetSalesDetailsResponse>> getSalesDetails(
+    String appPick,
+    int id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -319,7 +324,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/Sales/GetSalesDetails?Appname=${appPick}',
+              '/api/Sales/GetSalesDetails?Appname=${appPick}&id=${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -336,7 +341,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<CustomerListCountResponse> getCustomerCount() async {
+  Future<CustomerListCountResponse> getCustomerCount(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -349,7 +354,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/CustomerList/GetCustomsersCount',
+              '/api/CustomerList/GetCustomsersCount?id=${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -364,7 +369,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<CustomerListDetailsResponse>> getCustomerDetails(
-      String appPickup) async {
+    String appPickup,
+    int id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -377,7 +384,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/CustomerList/GetCustomsersDetails?Appname=${appPickup}',
+              '/api/CustomerList/GetCustomsersDetails?Appname=${appPickup}&id=${id}',
               queryParameters: queryParameters,
               data: _data,
             )

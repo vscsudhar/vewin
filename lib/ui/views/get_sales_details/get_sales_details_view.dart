@@ -20,7 +20,7 @@ class GetSalesDetailsView extends StackedView<GetSalesDetailsViewModel> {
       backgroundColor: appwhite1,
       appBar: AppBar(
         title: Text(
-          'Customer List',
+          'Sales Details',
           style: fontFamilyMedium.size26.black,
         ),
         backgroundColor: appcolororenge,
@@ -106,7 +106,7 @@ class GetSalesDetailsView extends StackedView<GetSalesDetailsViewModel> {
             ),
           ],
         ),
-      ) : AnimatedCircularProgressIndicator(),
+      ) : Center(child: AnimatedCircularProgressIndicator()),
     );
   }
 

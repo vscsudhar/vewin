@@ -122,95 +122,104 @@ class SalesView extends StackedView<SalesViewModel> {
                             color: appcolororenge,
                             width: 200,
                             title: 'Submit',
-                            onTap: () {},
+                            onTap: () {
+                              viewModel.datepicks();
+                            },
                           ),
                           verticalSpacing20,
-                          SingleChildScrollView(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.90,
-                              height: 500,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: appChambray,
-                              ),
-                              child: Padding(
-                                padding: defaultPadding12,
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding: topPadding40 + topPadding10,
-                                      child: Container(
-                                        width: MediaQuery.of(context).size.width * 90,
-                                        height: MediaQuery.of(context).size.height * 90,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: ListView.builder(
-                                          itemCount: viewModel.totalsale.length,
-                                          itemBuilder: (context, index) => ListTile(
-                                            onTap: () => viewModel.appPick(viewModel.appname[index]),
-                                            // print(viewModel.appname[index]
 
-                                            title: Row(
-                                              children: [
-                                                Text(
-                                                  viewModel.totalsale[index].appName.toString(),
-                                                  style: fontFamilyMedium.size16.appViking1,
+                          if (viewModel.isvalid == true)
+                           viewModel.appList.isNotEmpty ?
+                            SingleChildScrollView(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.90,
+                                height: 500,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: appChambray,
+                                ),
+                                child: Padding(
+                                  padding: defaultPadding12,
+                                  child: Stack(
+                                    children: [
+                                     
+                                           Padding(
+                                              padding: topPadding40 + topPadding10,
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width * 90,
+                                                height: MediaQuery.of(context).size.height * 90,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(10),
                                                 ),
-                                                horizontalDivider,
-                                                const Spacer(),
-                                                Text(
-                                                  viewModel.totalsale[index].sales.toString(),
-                                                  style: fontFamilyMedium.size16.appwhite,
+                                                child: ListView.builder(
+                                                  itemCount: viewModel.totalsale.length,
+                                                  itemBuilder: (context, index) => ListTile(
+                                                    onTap: () => viewModel.appPick(viewModel.appname[index]),
+                                                    // print(viewModel.appname[index]
+
+                                                    title: Row(
+                                                      children: [
+                                                        Text(
+                                                          viewModel.totalsale[index].appName.toString(),
+                                                          style: fontFamilyMedium.size16.appViking1,
+                                                        ),
+                                                        horizontalDivider,
+                                                        const Spacer(),
+                                                        Text(
+                                                          viewModel.totalsale[index].sales.toString(),
+                                                          style: fontFamilyMedium.size16.appwhite,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                  //SalesDetailsList(
+                                                  //   data: viewModel.totalsale[index],
+                                                  // ),
+                                                  // separatorBuilder: (context, index) => verticalDivider,
+                                                  // itemCount: viewModel.totalsale.length,
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-
-                                          //SalesDetailsList(
-                                          //   data: viewModel.totalsale[index],
-                                          // ),
-                                          // separatorBuilder: (context, index) => verticalDivider,
-                                          // itemCount: viewModel.totalsale.length,
+                                         
+                                      Padding(
+                                        padding: defaultPadding12,
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Application',
+                                              style: fontFamilyBold.appwhite.size20,
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              'Amount',
+                                              style: fontFamilyBold.appwhite.size20,
+                                            )
+                                            // Expanded(
+                                            //   child: Button(
+                                            //     width: MediaQuery.of(context).size.width * .5,
+                                            //     name: 'Application',
+                                            //     onPressed: () {},
+                                            //   ),
+                                            // ),
+                                            // horizontalSpacing10,
+                                            // Expanded(
+                                            //   child: Button(
+                                            //     width: MediaQuery.of(context).size.width * .5,
+                                            //     name: 'amount',
+                                            //     onPressed: () {},
+                                            //   ),
+                                            // ),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: defaultPadding12,
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            'Application',
-                                            style: fontFamilyBold.appwhite.size20,
-                                          ),
-                                          const Spacer(),
-                                          Text(
-                                            'Amount',
-                                            style: fontFamilyBold.appwhite.size20,
-                                          )
-                                          // Expanded(
-                                          //   child: Button(
-                                          //     width: MediaQuery.of(context).size.width * .5,
-                                          //     name: 'Application',
-                                          //     onPressed: () {},
-                                          //   ),
-                                          // ),
-                                          // horizontalSpacing10,
-                                          // Expanded(
-                                          //   child: Button(
-                                          //     width: MediaQuery.of(context).size.width * .5,
-                                          //     name: 'amount',
-                                          //     onPressed: () {},
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            ) :  const Center(
+                                              child: Text('data is not available'),
+                                            ),
                           verticalSpacing20
                         ],
                       ),

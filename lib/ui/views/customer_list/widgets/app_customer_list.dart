@@ -81,7 +81,7 @@ class AppCustomerList extends StackedView<CustomerListViewModel> {
             ],
           ),
         ),
-      ) : AnimatedCircularProgressIndicator(),
+      ) : Center(child: AnimatedCircularProgressIndicator()),
     );
   }
 

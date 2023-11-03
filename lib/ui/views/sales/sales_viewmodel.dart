@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
@@ -5,14 +7,14 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:vewin/app/app.locator.dart';
 import 'package:vewin/core/enum/dialog_type.dart';
 import 'package:vewin/core/mixins/navigation_mixin.dart';
-import 'package:vewin/core/models/get_sales_details_model.dart';
 import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/services/api_service.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 
 class SalesViewModel extends BaseViewModel with NavigationMixin {
   SalesViewModel() {
-    monthlySale();
+    _monthlySaleRequest = MonthlySaleRequest();
+    // monthlySale();
   }
 
   final _bottomSheetService = locator<BottomSheetService>();
@@ -23,8 +25,15 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
   String? _appPick;
   String? _appName;
+  bool? _isvalid;
 
-  MonthlySaleResponse? _monthlySaleResponse;
+  bool? get isvalid => _isvalid;
+
+  MonthlySaleResponse? monthlySaleResponse;
+  late MonthlySaleRequest _monthlySaleRequest;
+
+  MonthlySaleRequest? get monthlySaleRequest => _monthlySaleRequest;
+  // MonthlySaleResponse? get monthlySaleResponse => _monthlySaleResponse;
 
   final List<AppSalesList> _appList = [];
   final List<AppSalesList> _total = [];
@@ -32,28 +41,21 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   List<AppSalesList> get applist => _appList;
   List<AppSalesList> get total => _total;
 
-  List<AppSalesList> get appList => _monthlySaleResponse?.appSalesList ?? [];
-  List<AppSalesList> get totalsale => _monthlySaleResponse?.appSalesList ?? [];
+  List<AppSalesList> get appList => monthlySaleResponse?.appSalesList ?? [];
+  List<AppSalesList> get totalsale => monthlySaleResponse?.appSalesList ?? [];
 
-  List<String> get appname => appList
-      .map((appElement) => appElement.appName.toString())
-      .toSet()
-      .toList();
-  List<String> get salesAmt =>
-      appList.map((appElement) => appElement.sales.toString()).toSet().toList();
+  List<String> get appname => appList.map((appElement) => appElement.appName.toString()).toSet().toList();
+  List<String> get salesAmt => appList.map((appElement) => appElement.sales.toString()).toSet().toList();
 
   String get token => _sharedPreference.getString('token') ?? '';
-
-  // Future<void> monthlyapp() async {
-  //   setBusy(true);
-  //   _appList = await _apiService.monthlySaleRes().catchError((err) {});
-  // }
+  String get id => _sharedPreference.getString('id') ?? '';
 
   Future<void> monthlySale() async {
-    _monthlySaleResponse =
-        await runBusyFuture(_apiService.monthlySaleRes()).catchError((err) {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
       print(err);
-      showErrDialog('Something went Wrong');
+      if (hasError == HttpStatus.notFound) {
+        showErrDialog('Data is Not Available');
+      }
     });
     if (hasError) {
       showErrDialog('Something went Wrong');
@@ -61,8 +63,7 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
   }
 
   DateTime? _fromDate;
@@ -83,6 +84,7 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
       notifyListeners();
     }
   }
+
   Future<void> selectToDate(BuildContext context) async {
     final DateTime? toDate = await showDatePicker(
       context: context,
@@ -102,5 +104,20 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
     notifyListeners();
     _sharedPreference.setString('appName', appPick ?? '');
     goToGetSalesList();
+  }
+
+  void datepicks() {
+    _isvalid = true;
+    notifyListeners();
+    monthlySale();
+  }
+
+  void notFound(context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('There was No sales History Please Valid From and TO Date'),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 }

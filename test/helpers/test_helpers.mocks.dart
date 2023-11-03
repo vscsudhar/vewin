@@ -1062,17 +1062,19 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
       ) as _i15.Future<_i10.ProfileUpdateResponse>);
 
   @override
-  _i15.Future<_i11.MonthlySaleResponse> monthlySaleRes() => (super.noSuchMethod(
+  _i15.Future<_i11.MonthlySaleResponse> monthlySaleRes(
+          _i11.MonthlySaleRequest? monthlySaleRequest) =>
+      (super.noSuchMethod(
         Invocation.method(
           #monthlySaleRes,
-          [],
+          [monthlySaleRequest],
         ),
         returnValue: _i15.Future<_i11.MonthlySaleResponse>.value(
             _FakeMonthlySaleResponse_9(
           this,
           Invocation.method(
             #monthlySaleRes,
-            [],
+            [monthlySaleRequest],
           ),
         )),
         returnValueForMissingStub: _i15.Future<_i11.MonthlySaleResponse>.value(
@@ -1080,18 +1082,23 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
           this,
           Invocation.method(
             #monthlySaleRes,
-            [],
+            [monthlySaleRequest],
           ),
         )),
       ) as _i15.Future<_i11.MonthlySaleResponse>);
 
   @override
   _i15.Future<List<_i18.GetSalesDetailsResponse>> getSalesDetails(
-          String? appPick) =>
+    String? appPick,
+    int? id,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSalesDetails,
-          [appPick],
+          [
+            appPick,
+            id,
+          ],
         ),
         returnValue: _i15.Future<List<_i18.GetSalesDetailsResponse>>.value(
             <_i18.GetSalesDetailsResponse>[]),
@@ -1101,18 +1108,18 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
       ) as _i15.Future<List<_i18.GetSalesDetailsResponse>>);
 
   @override
-  _i15.Future<_i12.CustomerListCountResponse> getCustomerCount() =>
+  _i15.Future<_i12.CustomerListCountResponse> getCustomerCount(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCustomerCount,
-          [],
+          [id],
         ),
         returnValue: _i15.Future<_i12.CustomerListCountResponse>.value(
             _FakeCustomerListCountResponse_10(
           this,
           Invocation.method(
             #getCustomerCount,
-            [],
+            [id],
           ),
         )),
         returnValueForMissingStub:
@@ -1121,18 +1128,23 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
           this,
           Invocation.method(
             #getCustomerCount,
-            [],
+            [id],
           ),
         )),
       ) as _i15.Future<_i12.CustomerListCountResponse>);
 
   @override
   _i15.Future<List<_i19.CustomerListDetailsResponse>> getCustomerDetails(
-          String? appPickup) =>
+    String? appPickup,
+    int? id,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCustomerDetails,
-          [appPickup],
+          [
+            appPickup,
+            id,
+          ],
         ),
         returnValue: _i15.Future<List<_i19.CustomerListDetailsResponse>>.value(
             <_i19.CustomerListDetailsResponse>[]),

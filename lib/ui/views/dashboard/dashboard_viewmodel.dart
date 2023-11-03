@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -32,6 +33,7 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
   CustomerListCountResponse? _customerListCountResponse;
   List<BestPerformerResponse> _bestPerformerResponse = [];
 
+  MonthlySaleResponse? get monthlySaleResponse => _monthlySaleResponse;
   // List<Announcement>? get annoncement => _userAuthenticationService.loginResponse.dashboard?.announcements = [];
   List<CustomersCount> get customerCount => _customerListCountResponse?.customersCount ?? [];
   List<Totalcustomer> get totalcustomer => _customerListCountResponse?.totalcustomer ?? [];
@@ -47,6 +49,14 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
   List<String> get bestperformName => bestPerformerResponse.map((e) => e.name.toString()).toSet().toList();
   List<String> get bestperformImage => bestPerformerResponse.map((e) => e.photo.toString()).toSet().toList();
   List<String> get bestperformSales => bestPerformerResponse.map((e) => e.sales.toString()).toSet().toList();
+
+  final now = DateTime.now();
+  DateTime get fromDate => DateTime(now.year, now.month, 1);
+  DateTime get toDate => DateTime(now.year, now.month + 1, 0);
+
+  final dateFormatter = DateFormat('yyyy-MM-dd');
+  String get formattedFirstDate => dateFormatter.format(fromDate);
+  String get formattedLastDate => dateFormatter.format(toDate);
 
   String get token => _sharedPreference.getString('token') ?? '';
   List<Announcement> get annoncement {
@@ -64,9 +74,9 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> monthlySale() async {
-    _monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes()).catchError((err) {
+    _monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
       print(err);
-      showErrDialog('Something went Wrong');
+      
     });
     if (hasError) {
       showErrDialog('Something went Wrong');
@@ -74,7 +84,7 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> customerListCount() async {
-    _customerListCountResponse = await runBusyFuture(_apiService.getCustomerCount()).catchError((err) {
+    _customerListCountResponse = await runBusyFuture(_apiService.getCustomerCount(int.parse(id))).catchError((err) {
       print(err);
       showErrDialog('Something went Wrong');
     });

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
+import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/ui_helpers.dart';
 
 import 'startup_viewmodel.dart';
@@ -14,31 +15,32 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'VeWin',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [appwhite1, Color(0xffD7137D), appcolororenge ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16)),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 6,
+          ),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(90)),
+              child: Container(
+                height: 300,
+                width: 300,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/pos1.png'), // Replace with your image path
+                    fit: BoxFit.fill,
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -51,7 +53,5 @@ class StartupView extends StackedView<StartupViewModel> {
       StartupViewModel();
 
   @override
-  void onViewModelReady(StartupViewModel viewModel) =>
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) =>
-          viewModel.userAutoLogin() ?? viewModel.runStartupLogic());
+  void onViewModelReady(StartupViewModel viewModel) => SchedulerBinding.instance.addPostFrameCallback((timeStamp) => viewModel.userAutoLogin() ?? viewModel.runStartupLogic());
 }

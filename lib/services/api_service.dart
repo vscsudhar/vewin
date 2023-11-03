@@ -70,17 +70,17 @@ abstract class ApiService {
   @PUT('/api/User/UpdateUser/{id}')
   Future<ProfileUpdateResponse> updateProfile(@Path('id') String id);
 
-  @GET('/api/Sales/GetSales')
-  Future<MonthlySaleResponse> monthlySaleRes();
+  @POST('/api/Sales/GetSales')
+  Future<MonthlySaleResponse> monthlySaleRes(@Body() MonthlySaleRequest monthlySaleRequest);
 
-  @GET('/api/Sales/GetSalesDetails?Appname={appName}')
-  Future<List<GetSalesDetailsResponse>> getSalesDetails(@Path('appName') String appPick);
+  @GET('/api/Sales/GetSalesDetails?Appname={appName}&id={id}')
+  Future<List<GetSalesDetailsResponse>> getSalesDetails(@Path('appName') String appPick, @Path('id') int id);
 
-  @GET('/api/CustomerList/GetCustomsersCount')
-  Future<CustomerListCountResponse> getCustomerCount();
+  @GET('/api/CustomerList/GetCustomsersCount?id={id}')
+  Future<CustomerListCountResponse> getCustomerCount(@Path('id') int id);
 
-  @GET('/api/CustomerList/GetCustomsersDetails?Appname={appName}')
-  Future<List<CustomerListDetailsResponse>> getCustomerDetails(@Path('appName') String appPickup);
+  @GET('/api/CustomerList/GetCustomsersDetails?Appname={appName}&id={id}')
+  Future<List<CustomerListDetailsResponse>> getCustomerDetails(@Path('appName') String appPickup, @Path('id') int id);
 
   @GET('/api/Bestperformer/GetBestperformer')
   Future<List<BestPerformerResponse>> getBestPerformer();
