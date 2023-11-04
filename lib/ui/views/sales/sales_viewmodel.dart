@@ -37,13 +37,16 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
   final List<AppSalesList> _appList = [];
   final List<AppSalesList> _total = [];
+  final List<Totalsale> _totalsale1 = [];
 
   List<AppSalesList> get applist => _appList;
   List<AppSalesList> get total => _total;
+  List<Totalsale> get totalsaleamt => monthlySaleResponse?.totalsale ?? [];
 
   List<AppSalesList> get appList => monthlySaleResponse?.appSalesList ?? [];
   List<AppSalesList> get totalsale => monthlySaleResponse?.appSalesList ?? [];
 
+  List<int?> get totalSaleAmt => totalsaleamt.map((e) => e.totalSale?.toInt()).toSet().toList();
   List<String> get appname => appList.map((appElement) => appElement.appName.toString()).toSet().toList();
   List<String> get salesAmt => appList.map((appElement) => appElement.sales.toString()).toSet().toList();
 

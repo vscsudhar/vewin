@@ -39,7 +39,7 @@ class UserAuthenticationService with NavigationMixin {
       _sharedPreference.setString(
           'id', _loginResponse?.dashboard?.id.toString() ?? '');
       _sharedPreference.setString(
-          'annoncement', json.encode(_loginResponse?.dashboard?.announcements));
+          'annoncement', json.encode(_loginResponse));
       _sharedPreference.setString(
           'usertype', _loginResponse?.dashboard?.userType ?? '');
       _sharedPreference.setString(

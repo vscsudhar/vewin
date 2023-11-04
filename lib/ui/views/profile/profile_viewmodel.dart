@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,10 +31,13 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
     goToLogin();
   }
 
+
+
   Future<void> pickImage() async {
     final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    final Uint8List? fileBytes = await pickedImage?.readAsBytes();
 
     if (pickedImage != null) {
       _image = File(pickedImage.path);
@@ -41,6 +45,4 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
     }
     _sharedPreference.setString('image', pickedImage?.path ?? '');
   }
-
-  
 }

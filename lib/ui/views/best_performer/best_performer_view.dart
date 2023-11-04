@@ -41,7 +41,7 @@ class BestPerformerView extends StackedView<BestPerformerViewModel> {
                       ),
                       verticalSpacing20,
                       Text(
-                        viewModel.bestperformName.toString(),
+                        viewModel.bestperformName.join(),
                         style: fontFamilyBold.appBrinkPink1.size28,
                       ),
                       horizontalDivider,
@@ -68,7 +68,7 @@ class BestPerformerView extends StackedView<BestPerformerViewModel> {
                           ),
                           const Spacer(),
                           Text(
-                            viewModel.bestperformSales.toString(),
+                            viewModel.bestperformSales.join(),
                             style: fontFamilyMedium.appChambray1.size24,
                           ),
                         ],

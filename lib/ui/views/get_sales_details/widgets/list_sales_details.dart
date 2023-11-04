@@ -19,9 +19,9 @@ class ListSalesDetails extends ViewModelWidget<GetSalesDetailsViewModel> {
   Widget build(BuildContext context, GetSalesDetailsViewModel viewModel) {
     return !viewModel.isBusy
         ? Padding(
-            padding: defaultPadding8,
+            padding: defaultPadding4,
             child: Container(
-              height: 130, //150
+              height: 95, //150
               decoration: BoxDecoration(
                 color: appcolororenge,
                 borderRadius: BorderRadius.circular(12.0),
@@ -36,7 +36,7 @@ class ListSalesDetails extends ViewModelWidget<GetSalesDetailsViewModel> {
                       Row(
                         children: [
                           Padding(
-                            padding: defaultPadding8,
+                            padding: defaultPadding4,
                             child: Text(
                               data.date.toString().replaceAll('00:00:00', ''),
                               style: fontFamilyMedium.size18.black,
@@ -44,13 +44,13 @@ class ListSalesDetails extends ViewModelWidget<GetSalesDetailsViewModel> {
                           ),
                           const Spacer(),
                           horizontalDivider,
-                          Padding(
-                            padding: defaultPadding8,
-                            child: Text(
-                              '${data.id}',
-                              style: fontFamilyMedium.size18.appChambray1,
-                            ),
-                          )
+                          // Padding(
+                          //   padding: defaultPadding8,
+                          //   child: Text(
+                          //     '${data.id}',
+                          //     style: fontFamilyMedium.size18.appChambray1,
+                          //   ),
+                          // )
                         ],
                       ),
                       verticalSpacing10,

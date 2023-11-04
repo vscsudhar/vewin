@@ -17,12 +17,6 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
 // class _TextHeaderCarouselState extends State<TextHeaderCarousel> {
   int currentIndex = 0;
 
-  final List<String> textHeaders = [
-    'Provide a concise and compelling description.',
-    'Explain how it adds value to the customer.',
-    'Encourage the customer to take immediate action, if applicable.',
-    // Add more text headers as needed
-  ];
 
   @override
   Widget builder(BuildContext context, DashboardViewModel viewModel, Widget? child) {
@@ -33,7 +27,7 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
         ? Column(
             children: <Widget>[
               CarouselSlider(
-                items: textHeaders.map((annoncement) {
+                items: viewModel.annoncement.map((annoncement) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
@@ -42,10 +36,21 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                         margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(color: const Color(0xFF571E90), border: Border.all(), borderRadius: BorderRadius.circular(15)),
                         child: Center(
-                          child: Text(
-                            annoncement,
-                            textAlign: TextAlign.center,
-                            style: fontFamilyMedium.size20.appwhite,
+                          child: Column(
+                            children: [
+                              verticalSpacing4,
+                              Text(
+                                annoncement.title ?? '',
+                                textAlign: TextAlign.center,
+                                style: fontFamilyMedium.size20.appwhite,
+                              ),
+                              verticalSpacing8,
+                              Text(
+                                annoncement.description ?? '',
+                                textAlign: TextAlign.center,
+                                style: fontFamilyMedium.size12.copyWith(color: appViking),
+                              ),
+                            ],
                           ),
                         ),
                       );

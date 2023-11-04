@@ -60,8 +60,10 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
 
   String get token => _sharedPreference.getString('token') ?? '';
   List<Announcement> get annoncement {
-    var json1 = {"annoncement": json.decode(_sharedPreference.getString('annoncement') ?? "[{}]")};
-    return Dashboard.fromJson(json1).announcements ?? [];
+    final loginRes = json.decode(_sharedPreference.getString('annoncement') ?? "[{}]");
+    var dashboard =LoginResponse.fromJson(loginRes);
+    final announcement = dashboard.dashboard?.announcements ?? [];
+    return announcement;
   }
 
   String get name => _sharedPreference.getString('name') ?? '';
@@ -76,7 +78,6 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
   Future<void> monthlySale() async {
     _monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
       print(err);
-      
     });
     if (hasError) {
       showErrDialog('Something went Wrong');
@@ -107,3 +108,4 @@ class DashboardViewModel extends BaseViewModel with NavigationMixin {
     _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
   }
 }
+// http://vewin.vewinpro.com/api/Profile/1001.jpeg

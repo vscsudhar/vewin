@@ -11,8 +11,7 @@ import 'package:vewin/ui/views/dashboard/widget/text_carousel.dart';
 import 'dashboard_viewmodel.dart';
 
 class DashboardView extends StackedView<DashboardViewModel> {
-  const DashboardView(
-   {Key? key}) : super(key: key);
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
@@ -96,7 +95,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                   height: 60,
                                 ),
                                 Text(
-                                  '${viewModel.total}',
+                                  viewModel.total.join(),
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -124,7 +123,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  '${viewModel.bestperformName}',
+                                  viewModel.bestperformName.join(),
                                   // viewModel.bestperformName.toString(),
                                   style: fontFamilyBold.size14,
                                   textAlign: TextAlign.center,
@@ -157,7 +156,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                   height: 60,
                                 ),
                                 Text(
-                                  '${viewModel.customerApptotal}',
+                                  viewModel.customerApptotal.join(),
                                   // viewModel.customerApptotal.toString(),
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
@@ -186,7 +185,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  "[300000]",
+                                  "300000",
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),

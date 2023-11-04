@@ -35,19 +35,19 @@ class GetSalesDetailsView extends StackedView<GetSalesDetailsViewModel> {
         padding: defaultPadding12,
         child: Stack(
           children: [
-            Row(
-              children: [
-                Text(
-                  'Application',
-                  style: fontFamilyMedium.size22,
-                ),
-                const Spacer(),
-                Text('No of Customer', style: fontFamilyMedium.size22)
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Text(
+            //       'Application',
+            //       style: fontFamilyMedium.size22,
+            //     ),
+            //     const Spacer(),
+            //     Text('No of Customer', style: fontFamilyMedium.size22)
+            //   ],
+            // ),
             Center(
               child: Padding(
-                padding: topPadding40,
+                padding: zeroPadding,
                 child: Container(
                   width: MediaQuery.of(context).size.width * 90,
                   height: MediaQuery.of(context).size.height * 90,
