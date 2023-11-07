@@ -17,9 +17,9 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
 // class _TextHeaderCarouselState extends State<TextHeaderCarousel> {
   int currentIndex = 0;
 
-
   @override
-  Widget builder(BuildContext context, DashboardViewModel viewModel, Widget? child) {
+  Widget builder(
+      BuildContext context, DashboardViewModel viewModel, Widget? child) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -30,27 +30,37 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                 items: viewModel.annoncement.map((annoncement) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return Container(
-                        width: screenWidth, // Use screenWidth instead of double.infinity
-                        height: 200,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: const Color(0xFF571E90), border: Border.all(), borderRadius: BorderRadius.circular(15)),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              verticalSpacing4,
-                              Text(
-                                annoncement.title ?? '',
-                                textAlign: TextAlign.center,
-                                style: fontFamilyMedium.size20.appwhite,
-                              ),
-                              verticalSpacing8,
-                              Text(
-                                annoncement.description ?? '',
-                                textAlign: TextAlign.center,
-                                style: fontFamilyMedium.size12.copyWith(color: appViking),
-                              ),
-                            ],
+                      return InkWell(
+                        onTap: () => viewModel.goToAnnouncement(annoncement),
+                        child: Container(
+                          width:
+                              screenWidth, // Use screenWidth instead of double.infinity
+                          height: 200,
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF571E90),
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                verticalSpacing4,
+                                Text(
+                                  annoncement.title ?? '',
+                                  textAlign: TextAlign.center,
+                                  style: fontFamilyMedium.size20.appwhite,
+                                ),
+                                verticalSpacing8,
+                                Text(
+                                  annoncement.description ?? '',
+                                  textAlign: TextAlign.center,
+                                  style: fontFamilyMedium.size12
+                                      .copyWith(color: appViking),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -73,5 +83,6 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
   }
 
   @override
-  DashboardViewModel viewModelBuilder(BuildContext context) => DashboardViewModel();
+  DashboardViewModel viewModelBuilder(BuildContext context) =>
+      DashboardViewModel();
 }

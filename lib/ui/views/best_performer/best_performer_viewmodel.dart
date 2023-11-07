@@ -20,13 +20,18 @@ class BestPerformerViewModel extends BaseViewModel with NavigationMixin {
 
   List<BestPerformerResponse> _bestPerformerResponse = [];
 
-  List<BestPerformerResponse> get bestPerformerResponse => _bestPerformerResponse;
-  List<String> get bestperformName => bestPerformerResponse.map((e) => e.name.toString()).toSet().toList();
-  List<String> get bestperformImage => bestPerformerResponse.map((e) => e.photo.toString()).toSet().toList();
-  List<String> get bestperformSales => bestPerformerResponse.map((e) => e.sales.toString()).toSet().toList();
+  List<BestPerformerResponse> get bestPerformerResponse =>
+      _bestPerformerResponse;
+  List<String> get bestperformName =>
+      bestPerformerResponse.map((e) => e.name.toString()).toSet().toList();
+  List<String> get bestperformImage =>
+      bestPerformerResponse.map((e) => e.photo.toString()).toSet().toList();
+  List<String> get bestperformSales =>
+      bestPerformerResponse.map((e) => e.sales.toString()).toSet().toList();
 
   Future<void> bestPerformName() async {
-    _bestPerformerResponse = await runBusyFuture(_apiService.getBestPerformer()).catchError((err) {
+    _bestPerformerResponse =
+        await runBusyFuture(_apiService.getBestPerformer()).catchError((err) {
       print(err);
       showErrDialog('Something went Wrong');
     });
@@ -36,6 +41,7 @@ class BestPerformerViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 }

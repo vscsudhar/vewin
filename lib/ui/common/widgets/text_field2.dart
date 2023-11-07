@@ -53,7 +53,7 @@ class TextField2 extends StatelessWidget {
         ),
         // border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
       ),
-      
+
       onSaved: onSaved,
       onChanged: onChanged,
       validator: validator,

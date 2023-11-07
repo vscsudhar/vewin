@@ -34,7 +34,8 @@ abstract class ApiService {
     try {
       if (locator<UserAuthenticationService>().token.isNotEmpty) {
         log(locator<UserAuthenticationService>().token);
-        dio.options.headers['Authorization'] = 'Bearer ${locator<UserAuthenticationService>().token}';
+        dio.options.headers['Authorization'] =
+            'Bearer ${locator<UserAuthenticationService>().token}';
         dio.interceptors.add(PrettyDioLogger(requestBody: true));
       }
     } catch (e) {
@@ -47,40 +48,48 @@ abstract class ApiService {
   Future<RegisterResponse> register(@Body() RegisterRequest registerRequest);
 
   @POST('/api/User/VerifyMobileAndOTP?mobile={mobile}&otp={otp}')
-  Future<VerifiedOtpResponse> otpVerified(@Path('mobile') String mobile, @Path('otp') String otp);
+  Future<VerifiedOtpResponse> otpVerified(
+      @Path('mobile') String mobile, @Path('otp') String otp);
 
   @PUT('/api/Forgetpassword/ForgetPasswordOtp')
-  Future<ForgotPasswordResponse> forPass(@Body() ForgotPasswordRequest forgotPasswordRequest);
+  Future<ForgotPasswordResponse> forPass(
+      @Body() ForgotPasswordRequest forgotPasswordRequest);
 
-  @GET('/api/Forgetpassword/FrogetPasswordVerification?Mobile={mobile}&OTP={otp}')
-  Future<ForgotPasswordVerifyResponse> forVerifyOtp(@Path('mobile') String mobile, @Path('otp') String otp);
+  @GET(
+      '/api/Forgetpassword/FrogetPasswordVerification?Mobile={mobile}&OTP={otp}')
+  Future<ForgotPasswordVerifyResponse> forVerifyOtp(
+      @Path('mobile') String mobile, @Path('otp') String otp);
 
   @PUT('/api/Forgetpassword/UpdatePassword')
-  Future<UpdatePasswordResponse> updatePass(@Body() UpdatePasswordRequest updatePasswordRequest);
+  Future<UpdatePasswordResponse> updatePass(
+      @Body() UpdatePasswordRequest updatePasswordRequest);
 
-  @POST('/Login?Mobile={mobile}&Password={password}')
-  Future<LoginResponse> login(@Path('mobile') String mobile, @Path('password') String password);
+  @POST('/Login')
+  Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
   @POST('/api/Kyc/AddPanDetails')
   Future<PanNoAddResponse> panAdd(@Body() PanAddRequest panAddRequest);
 
   @POST('/api/Kyc/AddBankDetails')
-  Future<BankAccountAddResponse> addBank(@Body() BankAccountAddRequest bankAccountAddRequest);
+  Future<BankAccountAddResponse> addBank(
+      @Body() BankAccountAddRequest bankAccountAddRequest);
 
   @PUT('/api/User/UpdateUser/{id}')
   Future<ProfileUpdateResponse> updateProfile(@Path('id') String id);
 
   @POST('/api/Sales/GetSales')
-  Future<MonthlySaleResponse> monthlySaleRes(@Body() MonthlySaleRequest monthlySaleRequest);
+  Future<MonthlySaleResponse> monthlySaleRes(
+      @Body() MonthlySaleRequest monthlySaleRequest);
 
-  @GET('/api/Sales/GetSalesDetails?Appname={appName}&id={id}')
-  Future<List<GetSalesDetailsResponse>> getSalesDetails(@Path('appName') String appPick, @Path('id') int id);
+  @POST('/api/Sales/GetSalesDetails')
+  Future<List<GetSalesDetailsResponse>> getSalesDetails(@Body() GetSalesDetailsRequest getSalesDetailsRequest);
 
   @GET('/api/CustomerList/GetCustomsersCount?id={id}')
   Future<CustomerListCountResponse> getCustomerCount(@Path('id') int id);
 
   @GET('/api/CustomerList/GetCustomsersDetails?Appname={appName}&id={id}')
-  Future<List<CustomerListDetailsResponse>> getCustomerDetails(@Path('appName') String appPickup, @Path('id') int id);
+  Future<List<CustomerListDetailsResponse>> getCustomerDetails(
+      @Path('appName') String appPickup, @Path('id') int id);
 
   @GET('/api/Bestperformer/GetBestperformer')
   Future<List<BestPerformerResponse>> getBestPerformer();

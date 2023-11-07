@@ -20,19 +20,32 @@ class CustomerListViewModel extends BaseViewModel with NavigationMixin {
   String? _applicationPick;
 
   CustomerListCountResponse? _customerListCountResponse;
-  CustomerListCountResponse? get  customerListCountResponse => _customerListCountResponse;
-  List<CustomersCount> get customerCount => _customerListCountResponse?.customersCount ?? [];
-  List<Totalcustomer> get totalcustomer => _customerListCountResponse?.totalcustomer ?? [];
+  CustomerListCountResponse? get customerListCountResponse =>
+      _customerListCountResponse;
+  List<CustomersCount> get customerCount =>
+      _customerListCountResponse?.customersCount ?? [];
+  List<Totalcustomer> get totalcustomer =>
+      _customerListCountResponse?.totalcustomer ?? [];
 
-  List<String> get customerApp => customerCount.map((appElement) => appElement.appName.toString()).toSet().toList();
-  List<String> get customersCount => customerCount.map((appElement) => appElement.count.toString()).toSet().toList();
-  List<String> get customerApptotal => totalcustomer.map((appElement) => appElement.totalCustomers.toString()).toSet().toList();
+  List<String> get customerApp => customerCount
+      .map((appElement) => appElement.appName.toString())
+      .toSet()
+      .toList();
+  List<String> get customersCount => customerCount
+      .map((appElement) => appElement.count.toString())
+      .toSet()
+      .toList();
+  List<String> get customerApptotal => totalcustomer
+      .map((appElement) => appElement.totalCustomers.toString())
+      .toSet()
+      .toList();
 
-    String get id => _sharedPreference.getString('id') ?? '';
-
+  String get id => _sharedPreference.getString('id') ?? '';
 
   Future<void> customerListCount() async {
-    _customerListCountResponse = await runBusyFuture(_apiService.getCustomerCount(int.parse(id))).catchError((err) {
+    _customerListCountResponse =
+        await runBusyFuture(_apiService.getCustomerCount(int.parse(id)))
+            .catchError((err) {
       print(err);
       showErrDialog('Something went Wrong');
     });
@@ -42,7 +55,8 @@ class CustomerListViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 
   appPick(applicationPick) {

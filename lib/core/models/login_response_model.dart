@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) =>
-    LoginResponse.fromJson(json.decode(str));
+LoginResponse loginResponseFromJson(String str) => LoginResponse.fromJson(json.decode(str));
 
 String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
@@ -20,9 +19,7 @@ class LoginResponse {
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         token: json["token"],
-        dashboard: json["dashboard"] == null
-            ? null
-            : Dashboard.fromJson(json["dashboard"]),
+        dashboard: json["dashboard"] == null ? null : Dashboard.fromJson(json["dashboard"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,10 +54,7 @@ class Dashboard {
         name: json["name"],
         designation: json["designation"],
         userType: json["userType"],
-        announcements: json["announcements"] == null
-            ? []
-            : List<Announcement>.from(
-                json["announcements"]!.map((x) => Announcement.fromJson(x))),
+        announcements: json["announcements"] == null ? [] : List<Announcement>.from(json["announcements"]!.map((x) => Announcement.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,9 +64,7 @@ class Dashboard {
         "name": name,
         "designation": designation,
         "userType": userType,
-        "announcements": announcements == null
-            ? []
-            : List<dynamic>.from(announcements!.map((x) => x.toJson())),
+        "announcements": announcements == null ? [] : List<dynamic>.from(announcements!.map((x) => x.toJson())),
       };
 }
 
@@ -93,5 +85,35 @@ class Announcement {
   Map<String, dynamic> toJson() => {
         "title": title,
         "description": description,
+      };
+}
+
+// To parse this JSON data, do
+//
+//     final loginRequest = loginRequestFromJson(jsonString);
+
+// import 'dart:convert';
+
+LoginRequest loginRequestFromJson(String str) => LoginRequest.fromJson(json.decode(str));
+
+String loginRequestToJson(LoginRequest data) => json.encode(data.toJson());
+
+class LoginRequest {
+  String? mobile;
+  String? password;
+
+  LoginRequest({
+    this.mobile,
+    this.password,
+  });
+
+  factory LoginRequest.fromJson(Map<String, dynamic> json) => LoginRequest(
+        mobile: json["mobile"],
+        password: json["password"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "mobile": mobile,
+        "password": password,
       };
 }

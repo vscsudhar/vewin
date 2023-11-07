@@ -75,9 +75,12 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       ),
                       verticalSpacing10,
                       verticalSpacing12,
-                      Text(viewModel.name, style: fontFamilyBold.size20.appChambray1),
-                      Text(viewModel.id, style: fontFamilyMedium.size16.appChambray1),
-                      Text(viewModel.mobile, style: fontFamilyMedium.size16.appChambray1),
+                      Text(viewModel.name,
+                          style: fontFamilyBold.size20.appChambray1),
+                      Text(viewModel.id,
+                          style: fontFamilyMedium.size16.appChambray1),
+                      Text(viewModel.mobile,
+                          style: fontFamilyMedium.size16.appChambray1),
                       Text('Area', style: fontFamilyMedium.size16.appChambray1),
                       verticalSpacing10,
                       horizontalDivider,
@@ -90,7 +93,8 @@ class ProfileView extends StackedView<ProfileViewModel> {
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text("LogOut"),
-                                  content: const Text('Are you sure to want Logout?'),
+                                  content: const Text(
+                                      'Are you sure to want Logout?'),
                                   actions: [
                                     InkWell(
                                       onTap: () => Navigator.pop(context),

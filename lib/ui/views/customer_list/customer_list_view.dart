@@ -66,18 +66,21 @@ class CustomerListView extends StackedView<CustomerListViewModel> {
                         child: ListView.builder(
                           itemCount: viewModel.customerCount.length,
                           itemBuilder: (context, index) => ListTile(
-                            onTap: () => viewModel.appPick(viewModel.customerApp[index]),
+                            onTap: () =>
+                                viewModel.appPick(viewModel.customerApp[index]),
                             title: Row(
                               children: [
                                 Text(
-                                  viewModel.customerCount[index].appName.toString(),
+                                  viewModel.customerCount[index].appName
+                                      .toString(),
                                   style: fontFamilyMedium.size16.appBrinkPink1,
                                 ),
                                 const Spacer(),
                                 Padding(
                                   padding: rightPadding40,
                                   child: Text(
-                                    viewModel.customerCount[index].count.toString(),
+                                    viewModel.customerCount[index].count
+                                        .toString(),
                                     style: fontFamilyMedium.size16.appViking1,
                                   ),
                                 ),

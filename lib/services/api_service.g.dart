@@ -165,14 +165,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<LoginResponse> login(
-    String mobile,
-    String password,
-  ) async {
+  Future<LoginResponse> login(LoginRequest loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(loginRequest.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
       method: 'POST',
@@ -181,7 +179,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Login?Mobile=${mobile}&Password=${password}',
+              '/Login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -309,22 +307,21 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<GetSalesDetailsResponse>> getSalesDetails(
-    String appPick,
-    int id,
-  ) async {
+      GetSalesDetailsRequest getSalesDetailsRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(getSalesDetailsRequest.toJson());
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<GetSalesDetailsResponse>>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/Sales/GetSalesDetails?Appname=${appPick}&id=${id}',
+              '/api/Sales/GetSalesDetails',
               queryParameters: queryParameters,
               data: _data,
             )

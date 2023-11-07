@@ -4,6 +4,7 @@ import 'package:vewin/app/app.locator.dart';
 import 'package:vewin/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:vewin/core/mixins/navigation_mixin.dart';
+import 'package:vewin/core/models/login_response_model.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 
 class StartupViewModel extends BaseViewModel with NavigationMixin {
@@ -34,7 +35,7 @@ class StartupViewModel extends BaseViewModel with NavigationMixin {
       if (mobile.isEmpty || password.isEmpty) {
         goToLogin();
       } else {
-        _userAuthenticationService.login(mobile, password);
+        _userAuthenticationService.login(LoginRequest(mobile: mobile, password: password));
       }
     });
   }

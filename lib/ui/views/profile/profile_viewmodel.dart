@@ -31,11 +31,10 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
     goToLogin();
   }
 
-
-
   Future<void> pickImage() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     final Uint8List? fileBytes = await pickedImage?.readAsBytes();
 

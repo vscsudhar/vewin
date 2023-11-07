@@ -24,6 +24,7 @@ import 'package:vewin/ui/views/set_password_otp/set_password_view.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 import 'package:vewin/ui/views/get_sales_details/get_sales_details_view.dart';
 import 'package:vewin/ui/views/app_customer_list/app_customer_list_view.dart';
+import 'package:vewin/ui/views/announcement_description/announcement_description_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -47,6 +48,7 @@ import 'package:vewin/ui/views/app_customer_list/app_customer_list_view.dart';
     MaterialRoute(page: SetPasswordView),
     MaterialRoute(page: GetSalesDetailsView),
     MaterialRoute(page: AppCustomerListView),
+    MaterialRoute(page: AnnouncementDescriptionView),
 // @stacked-route
   ],
   dependencies: [

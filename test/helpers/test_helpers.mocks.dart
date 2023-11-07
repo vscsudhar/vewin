@@ -948,26 +948,17 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
       ) as _i15.Future<_i6.UpdatePasswordResponse>);
 
   @override
-  _i15.Future<_i7.LoginResponse> login(
-    String? mobile,
-    String? password,
-  ) =>
+  _i15.Future<_i7.LoginResponse> login(_i7.LoginRequest? loginRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [
-            mobile,
-            password,
-          ],
+          [loginRequest],
         ),
         returnValue: _i15.Future<_i7.LoginResponse>.value(_FakeLoginResponse_5(
           this,
           Invocation.method(
             #login,
-            [
-              mobile,
-              password,
-            ],
+            [loginRequest],
           ),
         )),
         returnValueForMissingStub:
@@ -975,10 +966,7 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
           this,
           Invocation.method(
             #login,
-            [
-              mobile,
-              password,
-            ],
+            [loginRequest],
           ),
         )),
       ) as _i15.Future<_i7.LoginResponse>);
@@ -1089,16 +1077,11 @@ class MockApiService extends _i1.Mock implements _i17.ApiService {
 
   @override
   _i15.Future<List<_i18.GetSalesDetailsResponse>> getSalesDetails(
-    String? appPick,
-    int? id,
-  ) =>
+          _i18.GetSalesDetailsRequest? getSalesDetailsRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSalesDetails,
-          [
-            appPick,
-            id,
-          ],
+          [getSalesDetailsRequest],
         ),
         returnValue: _i15.Future<List<_i18.GetSalesDetailsResponse>>.value(
             <_i18.GetSalesDetailsResponse>[]),
@@ -1201,17 +1184,11 @@ class MockUserAuthenticationService extends _i1.Mock
       ) as _i7.LoginResponse);
 
   @override
-  _i15.Future<dynamic> login(
-    String? mobile,
-    String? password,
-  ) =>
+  _i15.Future<dynamic> login(_i7.LoginRequest? loginRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [
-            mobile,
-            password,
-          ],
+          [loginRequest],
         ),
         returnValue: _i15.Future<dynamic>.value(),
         returnValueForMissingStub: _i15.Future<dynamic>.value(),
@@ -1322,6 +1299,15 @@ class MockUserAuthenticationService extends _i1.Mock
         Invocation.method(
           #goToSales,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void goToAnnouncement(_i7.Announcement? announcement) => super.noSuchMethod(
+        Invocation.method(
+          #goToAnnouncement,
+          [announcement],
         ),
         returnValueForMissingStub: null,
       );

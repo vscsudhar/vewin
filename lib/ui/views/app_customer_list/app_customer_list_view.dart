@@ -26,7 +26,9 @@ class AppCustomerListView extends StackedView<AppCustomerListViewModel> {
         backgroundColor: appcolororenge,
         elevation: 0,
         centerTitle: true,
-        leading: InkWell(onTap: () => Navigator.pop(context), child: const Icon(Icons.arrow_back)),
+        leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(Icons.arrow_back)),
       ),
       body: !viewModel.isBusy
           ? SingleChildScrollView(
@@ -70,10 +72,13 @@ class AppCustomerListView extends StackedView<AppCustomerListViewModel> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: ListView.separated(
-                                    itemBuilder: (context, index) => CustomerList(
-                                          data: viewModel.name[index], index: index,
+                                    itemBuilder: (context, index) =>
+                                        CustomerList(
+                                          data: viewModel.name[index],
+                                          index: index,
                                         ),
-                                    separatorBuilder: (context, index) => const Text(''),
+                                    separatorBuilder: (context, index) =>
+                                        const Text(''),
                                     itemCount: viewModel.appname.length)),
                           ),
                         ],

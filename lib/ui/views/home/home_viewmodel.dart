@@ -3,10 +3,13 @@ import 'package:vewin/app/app.locator.dart';
 import 'package:vewin/core/mixins/navigation_mixin.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:vewin/core/models/login_response_model.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 
 class HomeViewModel extends BaseViewModel with NavigationMixin {
   HomeViewModel() {
+    _loginRequest = LoginRequest();
+
     init();
   }
   init() async {
@@ -19,24 +22,28 @@ class HomeViewModel extends BaseViewModel with NavigationMixin {
   String? _password;
 
   final _userAuthenticationService = locator<UserAuthenticationService>();
+  late LoginRequest _loginRequest;
 
   String get mobile => _mobile ?? '';
   String get password => _password ?? '';
+  LoginRequest get loginRequest => _loginRequest;
 
   void userLogin() async {
+    loginRequest.mobile = mobile;
+    loginRequest.password = password;
     if (mobile.length == 10) {
-        setBusy(true);
-        notifyListeners();
-        await _userAuthenticationService.login(mobile, password);
-        setBusy(false);
-        final token = _userAuthenticationService.loginResponse.token;
-        if (token != null) {
-          _sharedPreference.setString('token', token);
-        } else {
-          showErrDialog('login failed');
-        }
+      setBusy(true);
+      notifyListeners();
+      await _userAuthenticationService.login(loginRequest);
+      setBusy(false);
+      final token = _userAuthenticationService.loginResponse.token;
+      if (token != null) {
+        _sharedPreference.setString('token', token);
       } else {
-        showErrDialog('Please Check Your Mobile Number (or) it should be 10 digit');
+        showErrDialog('login failed');
+      }
+    } else {
+      showErrDialog('Please Check Your Mobile Number (or) it should be 10 digit');
     }
   }
 

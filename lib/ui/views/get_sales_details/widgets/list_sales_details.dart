@@ -21,7 +21,7 @@ class ListSalesDetails extends ViewModelWidget<GetSalesDetailsViewModel> {
         ? Padding(
             padding: defaultPadding4,
             child: Container(
-              height: 95, //150
+              height: 100, //150
               decoration: BoxDecoration(
                 color: appcolororenge,
                 borderRadius: BorderRadius.circular(12.0),
@@ -29,7 +29,8 @@ class ListSalesDetails extends ViewModelWidget<GetSalesDetailsViewModel> {
               child: Card(
                 elevation: 20.0,
                 margin: const EdgeInsets.all(1.1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: InkWell(
                   child: Column(
                     children: [

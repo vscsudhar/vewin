@@ -9,7 +9,8 @@ class CustomerList extends ViewModelWidget<AppCustomerListViewModel> {
   const CustomerList({
     required this.data,
     // required this.index,
-    super.key, required int index,
+    super.key,
+    required int index,
   });
 
   final CustomerListDetailsResponse data;

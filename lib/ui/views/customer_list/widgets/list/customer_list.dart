@@ -19,46 +19,48 @@ class CustomerList extends ViewModelWidget<CustomerListViewModel> {
   Widget build(BuildContext context, CustomerListViewModel viewModel) {
     return Padding(
       padding: defaultPadding12,
-      child: !viewModel.isBusy ? 
-      Container(
-        height: 60, //150
-        decoration: BoxDecoration(
-          color: appChambray,
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        child: Card(
-          elevation: 20.0,
-          margin: const EdgeInsets.all(2),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          child: InkWell(
-            onTap: () => viewModel.appPick(viewModel.customerApp),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: defaultPadding8,
-                      child: Text(
-                        '${viewModel.customerApp}',
-                        style: fontFamilyRegular.size18.appChambray1,
+      child: !viewModel.isBusy
+          ? Container(
+              height: 60, //150
+              decoration: BoxDecoration(
+                color: appChambray,
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Card(
+                elevation: 20.0,
+                margin: const EdgeInsets.all(2),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: InkWell(
+                  onTap: () => viewModel.appPick(viewModel.customerApp),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: defaultPadding8,
+                            child: Text(
+                              '${viewModel.customerApp}',
+                              style: fontFamilyRegular.size18.appChambray1,
+                            ),
+                          ),
+                          const Spacer(),
+                          horizontalDivider,
+                          Padding(
+                            padding: defaultPadding8,
+                            child: Text(
+                              '${viewModel.customersCount}',
+                              style: fontFamilyRegular.size18.appChambray1,
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                    const Spacer(),
-                    horizontalDivider,
-                    Padding(
-                      padding: defaultPadding8,
-                      child: Text(
-                        '${viewModel.customersCount}',
-                        style: fontFamilyRegular.size18.appChambray1,
-                      ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ) : AnimatedCircularProgressIndicator(),
+              ),
+            )
+          : AnimatedCircularProgressIndicator(),
     );
   }
 }

@@ -30,18 +30,26 @@ class AppCustomerListViewModel extends BaseViewModel with NavigationMixin {
   String? get appPickup => _sharedPreference.getString('applicationName') ?? '';
   String get id => _sharedPreference.getString('id') ?? '';
 
-
-  List<String> get appname => _customerListDetailsResponse.map((element) => element.name.toString()).toSet().toList();
-  List<String> get custarea => _customerListDetailsResponse.map((element) => element.area.toString()).toSet().toList();
+  List<String> get appname => _customerListDetailsResponse
+      .map((element) => element.name.toString())
+      .toSet()
+      .toList();
+  List<String> get custarea => _customerListDetailsResponse
+      .map((element) => element.area.toString())
+      .toSet()
+      .toList();
 
   Future<void> getCustomerAppDetails() async {
-    _customerListDetailsResponse = await runBusyFuture(_apiService.getCustomerDetails(appPickup.toString(), int.parse(id))).catchError((err) {});
+    _customerListDetailsResponse = await runBusyFuture(
+            _apiService.getCustomerDetails(appPickup.toString(), int.parse(id)))
+        .catchError((err) {});
     if (hasError) {
       showErrDialog('Something went Wrong');
     } else {}
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 }

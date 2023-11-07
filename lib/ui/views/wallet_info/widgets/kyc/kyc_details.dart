@@ -25,7 +25,7 @@ class KycDetails extends StackedView<WalletInfoViewModel> {
         elevation: 0,
         centerTitle: true,
         leading: InkWell(
-            onTap: () => viewModel.goToWalletInfo(),
+            // onTap: () => viewModel.goToWalletInfo(),
             child: const Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
@@ -34,7 +34,7 @@ class KycDetails extends StackedView<WalletInfoViewModel> {
             verticalSpacing10,
             Box(
               padding: defaultPadding4,
-              onTap: () => viewModel.goToPan(),
+              // onTap: () => viewModel.goToPan(),
               margin: defaultPadding8,
               boxColor: appcolororenge,
               child: Row(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -74,6 +75,9 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   DateTime get fromDate => _fromDate ?? DateTime.now();
   DateTime get toDate => _toDate ?? DateTime.now();
 
+  String get fDate => fromDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(fromDate);
+  String get tDate => toDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(toDate);
+
   Future<void> selectFromDate(BuildContext context) async {
     final DateTime? fromDate = await showDatePicker(
       context: context,
@@ -84,8 +88,11 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
     if (fromDate != null) {
       _fromDate = fromDate;
+      _isvalid = true;
+
       notifyListeners();
     }
+    _sharedPreference.setString('fromdate', fDate ?? '');
   }
 
   Future<void> selectToDate(BuildContext context) async {
@@ -97,9 +104,11 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
     );
 
     if (toDate != null) {
-      _toDate = toDate;
+      _toDate = toDate ?? DateTime.now();
+
       notifyListeners();
     }
+    _sharedPreference.setString('todate', tDate ?? '');
   }
 
   appPick(appPick) {
@@ -111,8 +120,8 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
   void datepicks() {
     _isvalid = true;
-    notifyListeners();
     monthlySale();
+    notifyListeners();
   }
 
   void notFound(context) {
@@ -122,5 +131,14 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
         duration: Duration(seconds: 2),
       ),
     );
+  }
+
+  Future<void> monthlySales() async {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
+      print(err);
+    });
+    if (hasError) {
+      showErrDialog('Something went Wrong');
+    } else {}
   }
 }

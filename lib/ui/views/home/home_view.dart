@@ -54,7 +54,8 @@ class HomeView extends StackedView<HomeViewModel> {
                             }
                             return null;
                           },
-                          onSaved: (mobile) => viewModel.setMobile(mobile.toString()),
+                          onSaved: (mobile) =>
+                              viewModel.setMobile(mobile.toString()),
                         ),
                       ),
                       verticalSpacing20,
@@ -72,7 +73,8 @@ class HomeView extends StackedView<HomeViewModel> {
                             }
                             return null;
                           },
-                          onSaved: (password) => viewModel.setPass(password.toString()),
+                          onSaved: (password) =>
+                              viewModel.setPass(password.toString()),
                         ),
                       ),
                       verticalSpacing20,

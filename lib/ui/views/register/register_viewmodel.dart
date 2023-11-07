@@ -50,13 +50,16 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
     registerRequest.modifiedon = DateTime.now();
     registerRequest.isdeleted = '';
     if (registerRequest.password == confirmPass) {
-      final response = await runBusyFuture(_apiService.register(registerRequest)).catchError((error, stackTrace) {
+      final response =
+          await runBusyFuture(_apiService.register(registerRequest))
+              .catchError((error, stackTrace) {
         print(error);
         showErrDialog('Register Failed User Already Register');
         return error;
       });
       if (!hasError) {
-        _dialogService.showCustomDialog(title: 'Message', description: response.message);
+        _dialogService.showCustomDialog(
+            title: 'Message', description: response.message);
         notifyListeners();
         goToOtpRegister();
       } else {
@@ -88,7 +91,8 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 
   void setpass(String password) {

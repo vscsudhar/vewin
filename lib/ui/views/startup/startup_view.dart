@@ -22,7 +22,7 @@ class StartupView extends StackedView<StartupViewModel> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [appwhite1, Color(0xffD7137D), appcolororenge ],
+              colors: [appwhite1, Color(0xffD7137D), appcolororenge],
             ),
           ),
           child: Center(
@@ -34,7 +34,8 @@ class StartupView extends StackedView<StartupViewModel> {
                 decoration: const BoxDecoration(
                   shape: BoxShape.rectangle,
                   image: DecorationImage(
-                    image: AssetImage('assets/images/pos1.png'), // Replace with your image path
+                    image: AssetImage(
+                        'assets/images/pos1.png'), // Replace with your image path
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -53,5 +54,7 @@ class StartupView extends StackedView<StartupViewModel> {
       StartupViewModel();
 
   @override
-  void onViewModelReady(StartupViewModel viewModel) => SchedulerBinding.instance.addPostFrameCallback((timeStamp) => viewModel.userAutoLogin() ?? viewModel.runStartupLogic());
+  void onViewModelReady(StartupViewModel viewModel) =>
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) =>
+          viewModel.userAutoLogin() ?? viewModel.runStartupLogic());
 }

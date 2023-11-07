@@ -21,47 +21,48 @@ class SetPasswordView extends StackedView<SetPasswordViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          title: Text(
-            'Otp Verified for Password',
-            style: fontFamilyMedium.size26.black,
-          ),
-          backgroundColor: appcolororenge,
-          centerTitle: true,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: Text(
+          'Otp Verified for Password',
+          style: fontFamilyMedium.size26.black,
         ),
-        body: !viewModel.isBusy ?
-         SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                OtpTextField(
-                  onCodeChanged: (value) => value == null || value.isEmpty
-                      ? 'Otp  is required'
-                      : null,
-                  onSubmit: (value) => viewModel.setOtp(value.toString()),
+        backgroundColor: appcolororenge,
+        centerTitle: true,
+      ),
+      body: !viewModel.isBusy
+          ? SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    OtpTextField(
+                      onCodeChanged: (value) => value == null || value.isEmpty
+                          ? 'Otp  is required'
+                          : null,
+                      onSubmit: (value) => viewModel.setOtp(value.toString()),
+                    ),
+                    verticalSpacing16,
+                    // if(viewModel.otp == true)
+                    Button(
+                        name: 'Submit',
+                        onPressed: () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            formKey.currentState?.save();
+                            viewModel.sendOtpVerify();
+                          }
+                        }),
+                    verticalSpacing20,
+                    TextField2(
+                      readOnly: true,
+                      hintText: viewModel.otp,
+                    ),
+                  ],
                 ),
-                verticalSpacing16,
-                // if(viewModel.otp == true)
-                Button(
-                    name: 'Submit',
-                    onPressed: () {
-                      if (formKey.currentState?.validate() ?? false) {
-                        formKey.currentState?.save();
-                        viewModel.sendOtpVerify();
-                      }
-                    }),
-                verticalSpacing20,
-                TextField2(
-                  readOnly: true,
-                  hintText: viewModel.otp,
-                ),
-              ],
-            ),
-          ),
-        ) : AnimatedCircularProgressIndicator(),
-        );
+              ),
+            )
+          : AnimatedCircularProgressIndicator(),
+    );
   }
 
   @override
