@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,32 +24,24 @@ class UserAuthenticationService with NavigationMixin {
   LoginResponse get loginResponse => _loginResponse ?? LoginResponse();
 
   Future<dynamic> login(LoginRequest loginRequest) async {
-    _loginResponse =
-        await locator<ApiService>().login(loginRequest).catchError((e) {
-      _dialogService.showCustomDialog(
-          variant: DialogType.error,
-          description: 'Login Faild Maybe user or password Incorrect');
+    _loginResponse = await locator<ApiService>().login(loginRequest).catchError((e) {
+      _dialogService.showCustomDialog(variant: DialogType.error, description: "${loginResponse.statusMessage}\n${loginResponse.status}");
       return e;
     });
     _sharedPreference.setString('mobile', loginRequest.mobile ?? '');
     _sharedPreference.setString('password', loginRequest.password ?? '');
     if (_loginResponse?.token != null) {
-      log('token : ' + (_loginResponse?.token ?? ''));
-      _sharedPreference.setString(
-          'name', _loginResponse?.dashboard?.name ?? '');
-      _sharedPreference.setString(
-          'id', _loginResponse?.dashboard?.id.toString() ?? '');
+      log('token : ${_loginResponse?.token ?? ''}');
+      _sharedPreference.setString('name', _loginResponse?.dashboard?.name ?? '');
+      _sharedPreference.setString('id', _loginResponse?.dashboard?.id.toString() ?? '');
       _sharedPreference.setString('annoncement', json.encode(_loginResponse));
-      _sharedPreference.setString(
-          'usertype', _loginResponse?.dashboard?.userType ?? '');
-      _sharedPreference.setString(
-          'mobile', _loginResponse?.dashboard?.mobile ?? '');
-      _sharedPreference.setString(
-          'photo', _loginResponse?.dashboard?.photo ?? '');
+      // _sharedPreference.setString('banner', json.encode(_loginResponse));
+      _sharedPreference.setString('usertype', _loginResponse?.dashboard?.userType ?? '');
+      _sharedPreference.setString('mobile', _loginResponse?.dashboard?.mobile ?? '');
+      _sharedPreference.setString('photo', _loginResponse?.dashboard?.photo ?? '');
       goToDashboard();
     } else {
-      _dialogService.showCustomDialog(
-          variant: DialogType.error, description: 'Login Failed');
+      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Login Failed');
     }
   }
 

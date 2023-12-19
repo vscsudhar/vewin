@@ -53,22 +53,9 @@ class ChangePasswordViewModel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> updatePassword() async {
-    updatePasswordRequest.address = 'a';
-    updatePasswordRequest.createdby = 'user';
-    updatePasswordRequest.createdon = DateTime.now();
-    updatePasswordRequest.email = 'a';
-    updatePasswordRequest.id = 0;
-    updatePasswordRequest.isdeleted = 'a';
     updatePasswordRequest.mobile = mobile1;
     updatePasswordRequest.modifiedby = 'user';
     updatePasswordRequest.modifiedon = DateTime.now();
-    updatePasswordRequest.name = 'a';
-    // updatePasswordRequest.password = password;
-    updatePasswordRequest.photo = 'a';
-    updatePasswordRequest.pincode = 'a';
-    updatePasswordRequest.status = 'a';
-    updatePasswordRequest.usertype = 'user';
-    updatePasswordRequest.vcode = 'user';
     if (updatePasswordRequest.password == oldpass) {
       final updateresponse =
           await runBusyFuture(_apiService.updatePass(updatePasswordRequest))

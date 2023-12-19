@@ -4,92 +4,34 @@
 
 import 'dart:convert';
 
-ForgotPasswordRequest forgotPasswordRequestFromJson(String str) =>
-    ForgotPasswordRequest.fromJson(json.decode(str));
+ForgotPasswordRequest forgotPasswordRequestFromJson(String str) => ForgotPasswordRequest.fromJson(json.decode(str));
 
-String forgotPasswordRequestToJson(ForgotPasswordRequest data) =>
-    json.encode(data.toJson());
+String forgotPasswordRequestToJson(ForgotPasswordRequest data) => json.encode(data.toJson());
 
 class ForgotPasswordRequest {
-  int? id;
-  String? name;
-  String? mobile;
-  String? email;
-  String? address;
-  String? pincode;
-  String? password;
-  String? status;
-  String? vcode;
-  String? usertype;
-  String? createdby;
-  DateTime? createdon;
-  String? modifiedby;
-  DateTime? modifiedon;
-  String? isdeleted;
-  String? photo;
+    String? mobile;
+    String? modifiedby;
+    DateTime? modifiedon;
 
-  ForgotPasswordRequest({
-    this.id,
-    this.name,
-    this.mobile,
-    this.email,
-    this.address,
-    this.pincode,
-    this.password,
-    this.status,
-    this.vcode,
-    this.usertype,
-    this.createdby,
-    this.createdon,
-    this.modifiedby,
-    this.modifiedon,
-    this.isdeleted,
-    this.photo,
-  });
+    ForgotPasswordRequest({
+        this.mobile,
+        this.modifiedby,
+        this.modifiedon,
+    });
 
-  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) =>
-      ForgotPasswordRequest(
-        id: json["id"],
-        name: json["name"],
+    factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) => ForgotPasswordRequest(
         mobile: json["mobile"],
-        email: json["email"],
-        address: json["address"],
-        pincode: json["pincode"],
-        password: json["password"],
-        status: json["status"],
-        vcode: json["vcode"],
-        usertype: json["usertype"],
-        createdby: json["createdby"],
-        createdon: json["createdon"] == null
-            ? null
-            : DateTime.parse(json["createdon"]),
         modifiedby: json["modifiedby"],
-        modifiedon: json["modifiedon"] == null
-            ? null
-            : DateTime.parse(json["modifiedon"]),
-        isdeleted: json["isdeleted"],
-        photo: json["photo"],
-      );
+        modifiedon: json["modifiedon"] == null ? null : DateTime.parse(json["modifiedon"]),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+    Map<String, dynamic> toJson() => {
         "mobile": mobile,
-        "email": email,
-        "address": address,
-        "pincode": pincode,
-        "password": password,
-        "status": status,
-        "vcode": vcode,
-        "usertype": usertype,
-        "createdby": createdby,
-        "createdon": createdon?.toIso8601String(),
         "modifiedby": modifiedby,
         "modifiedon": modifiedon?.toIso8601String(),
-        "isdeleted": isdeleted,
-        "photo": photo,
-      };
+    };
 }
+
 
 ForgotPasswordResponse forgotPasswordResponseFromJson(String str) =>
     ForgotPasswordResponse.fromJson(json.decode(str));

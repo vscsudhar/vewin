@@ -85,7 +85,7 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
                 ),
               ),
             )
-          : AnimatedCircularProgressIndicator(),
+          : Center(child: AnimatedCircularProgressIndicator()),
     );
   }
 

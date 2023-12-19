@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
@@ -40,26 +38,19 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
   Future<void> registerUser() async {
     print(registerRequest.toJson().toString());
     registerRequest.password = password;
-    registerRequest.id = 0;
     registerRequest.usertype = 'user';
     registerRequest.createdby = 'user';
     registerRequest.modifiedby = 'user';
-    registerRequest.status = 'active';
-    registerRequest.vcode = 'active';
     registerRequest.createdon = DateTime.now();
     registerRequest.modifiedon = DateTime.now();
-    registerRequest.isdeleted = '';
     if (registerRequest.password == confirmPass) {
-      final response =
-          await runBusyFuture(_apiService.register(registerRequest))
-              .catchError((error, stackTrace) {
+      final response = await runBusyFuture(_apiService.register(registerRequest)).catchError((error, stackTrace) {
         print(error);
         showErrDialog('Register Failed User Already Register');
         return error;
       });
       if (!hasError) {
-        _dialogService.showCustomDialog(
-            title: 'Message', description: response.message);
+        _dialogService.showCustomDialog(title: 'Message', description: response.message);
         notifyListeners();
         goToOtpRegister();
       } else {
@@ -91,8 +82,7 @@ class RegisterViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
   }
 
   void setpass(String password) {

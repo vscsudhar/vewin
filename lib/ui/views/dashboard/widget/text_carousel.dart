@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:vewin/core/models/login_response_model.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
@@ -35,30 +34,36 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                         child: Container(
                           width:
                               screenWidth, // Use screenWidth instead of double.infinity
-                          height: 200,
+                          height: 250,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: BoxDecoration(
-                              color: const Color(0xFF571E90),
+                              color: appcolororenge,//const Color(0xFF571E90),
                               border: Border.all(),
                               borderRadius: BorderRadius.circular(15)),
                           child: Center(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 verticalSpacing4,
-                                Text(
-                                  annoncement.title ?? '',
-                                  textAlign: TextAlign.center,
-                                  style: fontFamilyMedium.size20.appwhite,
+                                Padding(
+                                  padding: leftPadding10 + rightPadding10 + topPadding8,
+                                  child: Text(
+                                    annoncement.title ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: fontFamilyMedium.size18.black,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                  ),
                                 ),
                                 verticalSpacing8,
-                                Text(
-                                  annoncement.description ?? '',
-                                  textAlign: TextAlign.center,
-                                  style: fontFamilyMedium.size12
-                                      .copyWith(color: appViking),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
+                                // Text(
+                                //   annoncement.description ?? '',
+                                //   textAlign: TextAlign.center,
+                                //   style: fontFamilyMedium.size12
+                                //       .copyWith(color: appViking),
+                                //   overflow: TextOverflow.ellipsis,
+                                //   maxLines: 2,
+                                // ),
                               ],
                             ),
                           ),
@@ -69,7 +74,7 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                 }).toList(),
                 options: CarouselOptions(
                   scrollDirection: Axis.vertical,
-                  height: 100,
+                  height: 110,
                   viewportFraction: 1,
                   padEnds: false,
                   autoPlay: true,

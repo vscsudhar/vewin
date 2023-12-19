@@ -39,11 +39,16 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           viewModel.image == null
-                              ? const CircleAvatar(
+                              ? CircleAvatar(
                                   radius: 50,
                                   backgroundColor: appViking,
-                                  foregroundImage: AssetImage(
-                                    'assets/gif/person.gif',
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      viewModel.updatedImage1,
+                                      fit: BoxFit.cover,
+                                      width: 100, // Adjust the width and height as needed
+                                      height: 100,
+                                    ),
                                   ),
                                 )
                               : Container(
@@ -75,13 +80,10 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       ),
                       verticalSpacing10,
                       verticalSpacing12,
-                      Text(viewModel.name,
-                          style: fontFamilyBold.size20.appChambray1),
-                      Text(viewModel.id,
-                          style: fontFamilyMedium.size16.appChambray1),
-                      Text(viewModel.mobile,
-                          style: fontFamilyMedium.size16.appChambray1),
-                      Text('Area', style: fontFamilyMedium.size16.appChambray1),
+                      Text(viewModel.name, style: fontFamilyBold.size20.appChambray1),
+                      Text(viewModel.id, style: fontFamilyMedium.size16.appChambray1),
+                      Text(viewModel.mobile, style: fontFamilyMedium.size16.appChambray1),
+                      // Text('Area', style: fontFamilyMedium.size16.appChambray1),
                       verticalSpacing10,
                       horizontalDivider,
                       verticalSpacing10,
@@ -93,8 +95,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text("LogOut"),
-                                  content: const Text(
-                                      'Are you sure to want Logout?'),
+                                  content: const Text('Are you sure to want Logout?'),
                                   actions: [
                                     InkWell(
                                       onTap: () => Navigator.pop(context),
@@ -138,7 +139,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                   ),
                 ),
               )
-            : AnimatedCircularProgressIndicator());
+            : Center(child: AnimatedCircularProgressIndicator()));
   }
 
   @override

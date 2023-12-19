@@ -77,7 +77,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                 ),
               ),
             )
-          : AnimatedCircularProgressIndicator(),
+          : Center(child: AnimatedCircularProgressIndicator()),
     );
   }
 

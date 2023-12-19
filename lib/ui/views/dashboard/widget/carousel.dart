@@ -1,50 +1,52 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
+import 'package:vewin/ui/views/dashboard/dashboard_viewmodel.dart';
 
-class ImageCarousel extends StatefulWidget {
-  const ImageCarousel({Key? key}) : super(key: key);
+class ImageCarousel extends StackedView<DashboardViewModel> {
+  ImageCarousel({Key? key}) : super(key: key);
 
-  @override
-  _ImageCarouselState createState() => _ImageCarouselState();
-}
+  final int currentIndex = 0;
 
-class _ImageCarouselState extends State<ImageCarousel> {
-  int currentIndex = 0;
-
-  final List<String> images = [
+  final List<String> image = [
     'assets/images/offer4.jpg',
     'assets/images/offer3.jpg',
     'assets/images/offer2.png',
     'assets/images/offer1.jpg',
-    // Add more image paths as needed
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder(BuildContext context, DashboardViewModel viewModel, Widget? child) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Column(
       children: <Widget>[
         CarouselSlider(
-          items: images.map((image) {
+          items: viewModel.banner.map((banner) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  width:
-                      screenWidth, // Use screenWidth instead of double.infinity
-                  height: 200,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                    color: appwhite1,
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      image,
-                      fit: BoxFit.fill,
+                return InkWell(
+                  onTap: () => viewModel.banner,
+                  child: Container(
+                    width: screenWidth, // Use screenWidth instead of double.infinity
+                    height: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: appwhite1,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Image.network(
+                        banner.image.toString(),
+                        fit: BoxFit.fill,
+                      ),
+                      // child: Image.memory(
+                      //   base64Decode(banner.image.toString()),
+                      //   fit: BoxFit.fill,
+                      // ),
                     ),
                   ),
                 );
@@ -59,16 +61,15 @@ class _ImageCarouselState extends State<ImageCarousel> {
             enlargeCenterPage: true,
             aspectRatio: 16 / 9,
             onPageChanged: (index, reason) {
-              setState(() {
-                currentIndex = index;
-              });
+              // Update currentIndex based on image index
+              viewModel.currentIndex1(index); //% viewModel.banner.length;
             },
           ),
         ),
         const SizedBox(height: 10), // Adjust the spacing as needed
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: images.asMap().entries.map((entry) {
+          children: viewModel.banner.asMap().entries.map((entry) {
             int index = entry.key;
             return Container(
               width: 8.0,
@@ -76,7 +77,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               margin: const EdgeInsets.symmetric(horizontal: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: currentIndex == index ? Colors.blue : Colors.grey,
+                color: viewModel.currentIndex == index ? Colors.blue : Colors.grey,
               ),
             );
           }).toList(),
@@ -84,4 +85,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
       ],
     );
   }
+
+  @override
+  DashboardViewModel viewModelBuilder(BuildContext context) => DashboardViewModel();
 }

@@ -1,5 +1,4 @@
 import 'dart:developer' show log;
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,21 +36,9 @@ class ForgotPasswordViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> mobileNoVerified() async {
     forgotPasswordRequest.mobile = mobile;
-    forgotPasswordRequest.address = 'a';
-    forgotPasswordRequest.email = 'a';
+   
     forgotPasswordRequest.modifiedby = 'user';
     forgotPasswordRequest.modifiedon = DateTime.now();
-    forgotPasswordRequest.name = 'a';
-    forgotPasswordRequest.pincode = 'a';
-    forgotPasswordRequest.password = 'a';
-    forgotPasswordRequest.createdby = 'a';
-    forgotPasswordRequest.id = 0;
-    forgotPasswordRequest.isdeleted = 'a';
-    forgotPasswordRequest.photo = 'a';
-    forgotPasswordRequest.status = 'a';
-    forgotPasswordRequest.vcode = 'a';
-    forgotPasswordRequest.usertype = 'a';
-    forgotPasswordRequest.createdon = DateTime.now();
     final response =
         await runBusyFuture(_apiService.forPass(forgotPasswordRequest))
             .catchError((err) {

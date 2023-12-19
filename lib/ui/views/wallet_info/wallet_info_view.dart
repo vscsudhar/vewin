@@ -65,7 +65,7 @@ class WalletInfoView extends StackedView<WalletInfoViewModel> {
                           ),
                           verticalSpacing16,
                           Text(
-                            '40000',
+                            'Rs.1',
                             style: fontFamilyBold.size34,
                           ),
                         ],

@@ -16,6 +16,8 @@ import 'package:vewin/core/models/get_sales_details_model.dart';
 import 'package:vewin/core/models/login_response_model.dart';
 import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/core/models/pan_add_model.dart';
+import 'package:vewin/core/models/profile_imageUpdate_model.dart';
+import 'package:vewin/core/models/profile_image_model.dart';
 import 'package:vewin/core/models/profile_update_model.dart';
 import 'package:vewin/core/models/regiseter_verified_otp_model.dart';
 import 'package:vewin/core/models/register_model.dart';
@@ -30,12 +32,11 @@ abstract class ApiService {
 
   static ApiService init() {
     final dio = Dio();
-    dio.options.baseUrl = 'http://vewin.vewinpro.com';
+    dio.options.baseUrl = 'https://vewin.vewinpro.com';
     try {
       if (locator<UserAuthenticationService>().token.isNotEmpty) {
         log(locator<UserAuthenticationService>().token);
-        dio.options.headers['Authorization'] =
-            'Bearer ${locator<UserAuthenticationService>().token}';
+        dio.options.headers['Authorization'] = 'Bearer ${locator<UserAuthenticationService>().token}';
         dio.interceptors.add(PrettyDioLogger(requestBody: true));
       }
     } catch (e) {
@@ -47,22 +48,17 @@ abstract class ApiService {
   @POST('/api/User/SendOTP')
   Future<RegisterResponse> register(@Body() RegisterRequest registerRequest);
 
-  @POST('/api/User/VerifyMobileAndOTP?mobile={mobile}&otp={otp}')
-  Future<VerifiedOtpResponse> otpVerified(
-      @Path('mobile') String mobile, @Path('otp') String otp);
+  @POST('/api/User/VerifyMobileAndOTP')
+  Future<VerifiedOtpResponse> otpVerified(@Body() VerifiedOtpRequest verifiedOtpResponse);
 
   @PUT('/api/Forgetpassword/ForgetPasswordOtp')
-  Future<ForgotPasswordResponse> forPass(
-      @Body() ForgotPasswordRequest forgotPasswordRequest);
+  Future<ForgotPasswordResponse> forPass(@Body() ForgotPasswordRequest forgotPasswordRequest);
 
-  @GET(
-      '/api/Forgetpassword/FrogetPasswordVerification?Mobile={mobile}&OTP={otp}')
-  Future<ForgotPasswordVerifyResponse> forVerifyOtp(
-      @Path('mobile') String mobile, @Path('otp') String otp);
+  @GET('/api/Forgetpassword/FrogetPasswordVerification?Mobile={mobile}&OTP={otp}')
+  Future<ForgotPasswordVerifyResponse> forVerifyOtp(@Path('mobile') String mobile, @Path('otp') String otp);
 
   @PUT('/api/Forgetpassword/UpdatePassword')
-  Future<UpdatePasswordResponse> updatePass(
-      @Body() UpdatePasswordRequest updatePasswordRequest);
+  Future<UpdatePasswordResponse> updatePass(@Body() UpdatePasswordRequest updatePasswordRequest);
 
   @POST('/Login')
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
@@ -71,15 +67,13 @@ abstract class ApiService {
   Future<PanNoAddResponse> panAdd(@Body() PanAddRequest panAddRequest);
 
   @POST('/api/Kyc/AddBankDetails')
-  Future<BankAccountAddResponse> addBank(
-      @Body() BankAccountAddRequest bankAccountAddRequest);
+  Future<BankAccountAddResponse> addBank(@Body() BankAccountAddRequest bankAccountAddRequest);
 
   @PUT('/api/User/UpdateUser/{id}')
   Future<ProfileUpdateResponse> updateProfile(@Path('id') String id);
 
   @POST('/api/Sales/GetSales')
-  Future<MonthlySaleResponse> monthlySaleRes(
-      @Body() MonthlySaleRequest monthlySaleRequest);
+  Future<MonthlySaleResponse> monthlySaleRes(@Body() MonthlySaleRequest monthlySaleRequest);
 
   @POST('/api/Sales/GetSalesDetails')
   Future<List<GetSalesDetailsResponse>> getSalesDetails(@Body() GetSalesDetailsRequest getSalesDetailsRequest);
@@ -88,9 +82,14 @@ abstract class ApiService {
   Future<CustomerListCountResponse> getCustomerCount(@Path('id') int id);
 
   @GET('/api/CustomerList/GetCustomsersDetails?Appname={appName}&id={id}')
-  Future<List<CustomerListDetailsResponse>> getCustomerDetails(
-      @Path('appName') String appPickup, @Path('id') int id);
+  Future<List<CustomerListDetailsResponse>> getCustomerDetails(@Path('appName') String appPickup, @Path('id') int id);
 
   @GET('/api/Bestperformer/GetBestperformer')
   Future<List<BestPerformerResponse>> getBestPerformer();
+
+  @POST('/api/User/AddProfileById')
+  Future<dynamic> getProfileImage(@Body() ProfileImageUpdateRequest profileImageUpdateRequest);
+
+  @POST('/api/User/GetProfile?id={id}')
+  Future<ProfileImageUpdateResponse> updateProfileImage(@Path('id') String id);
 }

@@ -31,10 +31,11 @@ class GetSalesDetailsViewModel extends BaseViewModel with NavigationMixin {
   List<GetSalesDetailsResponse> get salesDetail => _getSalesDetailsResponse;
   List<GetSalesDetailsResponse> get salesDetails => _getSalesDetailsResponse;
   GetSalesDetailsRequest? get getSalesDetailsRequest => _getSalesDetailsRequest;
+  final now = DateTime.now();
 
   String? get appPick => _sharedPreference.getString('appName') ?? '';
   String get id1 => _sharedPreference.getString('id') ?? '';
-  String get fdate => _sharedPreference.getString('fromdate') ?? '';
+  String get fdate => _sharedPreference.getString('fromdate') ?? DateTime(now.year, now.month, 1).toIso8601String();
   String get tdate => _sharedPreference.getString('todate') ?? DateTime.now().toIso8601String();
 
   List<String> get name => salesDetails.map((element) => element.name.toString()).toSet().toList();

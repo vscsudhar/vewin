@@ -54,8 +54,7 @@ class HomeView extends StackedView<HomeViewModel> {
                             }
                             return null;
                           },
-                          onSaved: (mobile) =>
-                              viewModel.setMobile(mobile.toString()),
+                          onSaved: (mobile) => viewModel.setMobile(mobile.toString()),
                         ),
                       ),
                       verticalSpacing20,
@@ -68,13 +67,12 @@ class HomeView extends StackedView<HomeViewModel> {
                           validator: (val) {
                             if (val == null || val.isEmpty) {
                               return 'Password is required';
-                            } else if (val.length < 8) {
-                              return 'Password must be at least 8 characters long';
+                            } else if (val.length < 6) {
+                              return 'Password must be at least 6 characters long';
                             }
                             return null;
                           },
-                          onSaved: (password) =>
-                              viewModel.setPass(password.toString()),
+                          onSaved: (password) => viewModel.setPass(password.toString()),
                         ),
                       ),
                       verticalSpacing20,

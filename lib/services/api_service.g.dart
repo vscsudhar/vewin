@@ -48,13 +48,12 @@ class _ApiService implements ApiService {
 
   @override
   Future<VerifiedOtpResponse> otpVerified(
-    String mobile,
-    String otp,
-  ) async {
+      VerifiedOtpRequest verifiedOtpResponse) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(verifiedOtpResponse.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VerifiedOtpResponse>(Options(
       method: 'POST',
@@ -63,7 +62,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/User/VerifyMobileAndOTP?mobile=${mobile}&otp=${otp}',
+              '/api/User/VerifyMobileAndOTP',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -424,6 +423,61 @@ class _ApiService implements ApiService {
         .map((dynamic i) =>
             BestPerformerResponse.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<dynamic> getProfileImage(
+      ProfileImageUpdateRequest profileImageUpdateRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(profileImageUpdateRequest.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/User/AddProfileById',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<ProfileImageUpdateResponse> updateProfileImage(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ProfileImageUpdateResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/User/GetProfile?id=${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ProfileImageUpdateResponse.fromJson(_result.data!);
     return value;
   }
 

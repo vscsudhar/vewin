@@ -43,7 +43,8 @@ class HomeViewModel extends BaseViewModel with NavigationMixin {
         showErrDialog('login failed');
       }
     } else {
-      showErrDialog('Please Check Your Mobile Number (or) it should be 10 digit');
+      showErrDialog(
+          'Please Check Your Mobile Number (or) it should be 10 digit');
     }
   }
 

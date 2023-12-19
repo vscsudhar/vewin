@@ -41,42 +41,23 @@ class ResetPasswordViewModel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> updatePassword() async {
-    updatePasswordRequest.address = 'a';
-    updatePasswordRequest.createdby = 'user';
-    updatePasswordRequest.createdon = DateTime.now();
-    updatePasswordRequest.email = 'a';
-    updatePasswordRequest.id = 0;
-    updatePasswordRequest.isdeleted = 'a';
     updatePasswordRequest.mobile = mobile1;
     updatePasswordRequest.modifiedby = 'user';
     updatePasswordRequest.modifiedon = DateTime.now();
-    updatePasswordRequest.name = 'a';
-    // updatePasswordRequest.password = password;
-    updatePasswordRequest.photo = 'a';
-    updatePasswordRequest.pincode = 'a';
-    updatePasswordRequest.status = 'a';
-    updatePasswordRequest.usertype = 'user';
-    updatePasswordRequest.vcode = 'user';
     if (updatePasswordRequest.password == confirmPass) {
-      final updateresponse =
-          await runBusyFuture(_apiService.updatePass(updatePasswordRequest))
-              .catchError((err, stackTrace) {
+      final updateresponse = await runBusyFuture(_apiService.updatePass(updatePasswordRequest)).catchError((err, stackTrace) {
         print(err);
         showErrDialog('Something Went Wrong');
         return err;
       });
       if (!hasError) {
-        _dialogService.showCustomDialog(
-            title: 'message',
-            description: updateresponse.statusMessage.toString());
+        _dialogService.showCustomDialog(title: 'message', description: updateresponse.statusMessage.toString());
         updateresponse.statusCode == 200;
         notifyListeners();
         goToLogin();
         _sharedPreference.clear();
       } else {
-        _dialogService.showCustomDialog(
-            title: 'message',
-            description: updateresponse.statusMessage.toString());
+        _dialogService.showCustomDialog(title: 'message', description: updateresponse.statusMessage.toString());
       }
     } else {
       showErrDialog('Miss Match PassWord');
@@ -84,8 +65,7 @@ class ResetPasswordViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
   }
 
   void setpass(String password) {

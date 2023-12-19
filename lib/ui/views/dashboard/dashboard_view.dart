@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
 import 'package:vewin/ui/common/widgets/box.dart';
-import 'package:vewin/ui/common/widgets/circular_progress_indicator.dart';
+import 'package:vewin/ui/common/widgets/dialogs/shimmer.dart';
 import 'package:vewin/ui/views/dashboard/widget/carousel.dart';
 import 'package:vewin/ui/views/dashboard/widget/drawer.dart';
 import 'package:vewin/ui/views/dashboard/widget/text_carousel.dart';
@@ -70,7 +70,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                   //   ),
                   // ),
                   verticalSpacing12,
-                  const ImageCarousel(),
+                  ImageCarousel(),
                   verticalSpacing12,
                   // verticalSpacing20,
                   Row(
@@ -185,7 +185,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  "300000",
+                                  "Rs.1",
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -197,7 +197,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
                 ]),
               ),
             )
-          : Center(child: AnimatedCircularProgressIndicator()),
+          : const ShimmerView(),
       drawer: const DrawerView(),
     );
   }

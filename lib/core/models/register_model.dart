@@ -74,92 +74,68 @@ class Errors {
         "\u0024.id": id == null ? [] : List<dynamic>.from(id!.map((x) => x)),
       };
 }
-
 // To parse this JSON data, do
 //
 //     final registerRequest = registerRequestFromJson(jsonString);
 
 // import 'dart:convert';
 
-RegisterRequest registerRequestFromJson(String str) =>
-    RegisterRequest.fromJson(json.decode(str));
+RegisterRequest registerRequestFromJson(String str) => RegisterRequest.fromJson(json.decode(str));
 
-String registerRequestToJson(RegisterRequest data) =>
-    json.encode(data.toJson());
+String registerRequestToJson(RegisterRequest data) => json.encode(data.toJson());
 
 class RegisterRequest {
-  int? id;
-  String? name;
-  String? mobile;
-  String? email;
-  String? address;
-  String? pincode;
-  String? password;
-  String? status;
-  String? vcode;
-  String? usertype;
-  String? createdby;
-  DateTime? createdon;
-  String? modifiedby;
-  DateTime? modifiedon;
-  String? isdeleted;
+    String? name;
+    String? mobile;
+    String? email;
+    String? address;
+    String? pincode;
+    String? password;
+    String? usertype;
+    String? createdby;
+    DateTime? createdon;
+    String? modifiedby;
+    DateTime? modifiedon;
 
-  RegisterRequest({
-    this.id,
-    this.name,
-    this.mobile,
-    this.email,
-    this.address,
-    this.pincode,
-    this.password,
-    this.status,
-    this.vcode,
-    this.usertype,
-    this.createdby,
-    this.createdon,
-    this.modifiedby,
-    this.modifiedon,
-    this.isdeleted,
-  });
+    RegisterRequest({
+        this.name,
+        this.mobile,
+        this.email,
+        this.address,
+        this.pincode,
+        this.password,
+        this.usertype,
+        this.createdby,
+        this.createdon,
+        this.modifiedby,
+        this.modifiedon,
+    });
 
-  factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
-      RegisterRequest(
-        id: json["id"],
+    factory RegisterRequest.fromJson(Map<String, dynamic> json) => RegisterRequest(
         name: json["name"],
         mobile: json["mobile"],
         email: json["email"],
         address: json["address"],
         pincode: json["pincode"],
         password: json["password"],
-        status: json["status"],
-        vcode: json["vcode"],
         usertype: json["usertype"],
         createdby: json["createdby"],
-        createdon: json["createdon"] == null
-            ? null
-            : DateTime.parse(json["createdon"]),
+        createdon: json["createdon"] == null ? null : DateTime.parse(json["createdon"]),
         modifiedby: json["modifiedby"],
-        modifiedon: json["modifiedon"] == null
-            ? null
-            : DateTime.parse(json["modifiedon"]),
-        isdeleted: json["isdeleted"],
-      );
+        modifiedon: json["modifiedon"] == null ? null : DateTime.parse(json["modifiedon"]),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
+    Map<String, dynamic> toJson() => {
         "name": name,
         "mobile": mobile,
         "email": email,
         "address": address,
         "pincode": pincode,
         "password": password,
-        "status": status,
-        "vcode": vcode,
         "usertype": usertype,
         "createdby": createdby,
         "createdon": createdon?.toIso8601String(),
         "modifiedby": modifiedby,
         "modifiedon": modifiedon?.toIso8601String(),
-        "isdeleted": isdeleted,
-      };
+    };
 }

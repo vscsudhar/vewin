@@ -41,7 +41,7 @@ class TextField2 extends StatelessWidget {
       keyboardType: keyboard ?? TextInputType.text, //username or email
       initialValue: initialValue ?? '',
       style: fontFamilyBold.size16,
-      cursorColor: Colors.white,
+      cursorColor: Colors.black,
       decoration: InputDecoration(
         hintText: hintText ?? '',
         hintStyle: hintStyle,

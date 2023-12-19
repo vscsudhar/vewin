@@ -1,4 +1,3 @@
-import 'dart:core';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -12,10 +11,10 @@ import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/services/api_service.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 
-class SalesViewModel extends BaseViewModel with NavigationMixin {
-  SalesViewModel() {
-    _monthlySaleRequest = MonthlySaleRequest();
-    monthlySale();
+class SalesListViewModel extends BaseViewModel with NavigationMixin{
+SalesListViewModel(){
+   _monthlySaleRequest = MonthlySaleRequest();
+    // monthlySale();
   }
 
   final _bottomSheetService = locator<BottomSheetService>();
@@ -47,30 +46,37 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   List<AppSalesList> get appList => monthlySaleResponse?.appSalesList ?? [];
   List<AppSalesList> get totalsale => monthlySaleResponse?.appSalesList ?? [];
 
-  List<int?> get totalSaleAmt => totalsaleamt.map((e) => e.totalSale?.toInt()).toSet().toList();
-  List<String> get appname => appList.map((appElement) => appElement.appName.toString()).toSet().toList();
-  List<String> get salesAmt => appList.map((appElement) => appElement.sales.toString()).toSet().toList();
+  List<int?> get totalSaleAmt =>
+      totalsaleamt.map((e) => e.totalSale?.toInt()).toSet().toList();
+  List<String> get appname => appList
+      .map((appElement) => appElement.appName.toString())
+      .toSet()
+      .toList();
+  List<String> get salesAmt =>
+      appList.map((appElement) => appElement.sales.toString()).toSet().toList();
 
   String get token => _sharedPreference.getString('token') ?? '';
   String get id => _sharedPreference.getString('id') ?? '';
 
   Future<void> monthlySale() async {
-    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(
+            MonthlySaleRequest(
+                fromDate: fromDate, id: int.parse(id), toDate: toDate)))
+        .catchError((err) {
       print(err);
-      if (hasError) {
+      if (hasError == HttpStatus.notFound) {
         goToSales();
         showErrDialog('Data is Not Available');
       }
     });
-    if (!hasError) {
-      // goToSalesList();
-    } else {
-      showErrDialog('Data is Not Available');
-    }
+    if (hasError) {
+      showErrDialog('Something went Wrong');
+    } else {}
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 
   final now = DateTime.now();
@@ -82,8 +88,10 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
   DateTime get toDate => _toDate ?? DateTime.now();
 
-  String get fDate => fromDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(fromDate);
-  String get tDate => toDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(toDate);
+  String get fDate =>
+      fromDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(fromDate);
+  String get tDate =>
+      toDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(toDate);
 
   Future<void> selectFromDate(BuildContext context) async {
     final DateTime? fromDate = await showDatePicker(
@@ -119,27 +127,31 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   appPick(appPick) {
     _appPick = appPick;
     notifyListeners();
-    goToGetSalesList();
     _sharedPreference.setString('appName', appPick ?? '');
+    goToGetSalesList();
   }
 
   void datepicks() {
     monthlySale();
-    // _isvalid = true;
+    _isvalid = true;
     notifyListeners();
   }
 
   void notFound(context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('There was No sales History Please Valid FromDate and TODate'),
+        content:
+            Text('There was No sales History Please Valid From and TO Date'),
         duration: Duration(seconds: 2),
       ),
     );
   }
 
   Future<void> monthlySales() async {
-    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(
+            MonthlySaleRequest(
+                fromDate: fromDate, id: int.parse(id), toDate: toDate)))
+        .catchError((err) {
       print(err);
     });
     if (hasError) {

@@ -48,9 +48,7 @@ class OtpView extends StackedView<OtpViewModel> {
                         maxLength: 4,
                         hintText: 'OTP',
                         hintStyle: fontFamilyRegular,
-                        validator: (val) => val == null || val.isEmpty
-                            ? 'OTP is required'
-                            : null,
+                        validator: (val) => val == null || val.isEmpty ? 'OTP is required' : null,
                         onSaved: (otp) => viewModel.setOtp(otp.toString()),
                       ),
                       // OtpTextField(
@@ -77,7 +75,7 @@ class OtpView extends StackedView<OtpViewModel> {
                       verticalSpacing20,
                       Button(
                           buttoncolor: Colors.green,
-                          name: 'Verified',
+                          name: 'Verify',
                           onPressed: () {
                             if (formKey.currentState?.validate() ?? false) {
                               formKey.currentState?.save();
@@ -85,17 +83,18 @@ class OtpView extends StackedView<OtpViewModel> {
                             }
                           }),
                       verticalSpacing60,
-                      TextField2(
-                        textAlign: TextAlign.center,
-                        readOnly: true,
-                        hintText: viewModel.otp,
-                      )
+                      Button(name: viewModel.otp, onPressed: () {}),
+                      // TextField2(
+                      //   textAlign: TextAlign.center,
+                      //   readOnly: true,
+                      //   hintText: viewModel.otp,
+                      // )
                     ],
                   ),
                 ),
               ),
             )
-          : AnimatedCircularProgressIndicator(),
+          : Center(child: AnimatedCircularProgressIndicator()),
     );
   }
 

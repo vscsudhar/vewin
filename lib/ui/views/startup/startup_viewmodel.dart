@@ -35,7 +35,8 @@ class StartupViewModel extends BaseViewModel with NavigationMixin {
       if (mobile.isEmpty || password.isEmpty) {
         goToLogin();
       } else {
-        _userAuthenticationService.login(LoginRequest(mobile: mobile, password: password));
+        _userAuthenticationService
+            .login(LoginRequest(mobile: mobile, password: password));
       }
     });
   }

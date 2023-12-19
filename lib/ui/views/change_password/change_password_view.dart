@@ -45,13 +45,14 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
                         // ),
                         verticalSpacing20,
                         TextField1(
+                          obscureText: true,
                           color: appChambray,
                           hintText: 'New Password',
                           validator: (val) {
                             if (val == null || val.isEmpty) {
                               return 'Password is required';
-                            } else if (val.length < 8) {
-                              return 'Password must be at least 8 characters long';
+                            } else if (val.length < 6) {
+                              return 'Password must be at least 6 characters long';
                             }
                             return null;
                           },
@@ -67,8 +68,8 @@ class ChangePasswordView extends StackedView<ChangePasswordViewModel> {
                           validator: (val) {
                             if (val == null || val.isEmpty) {
                               return 'Confirm Password is required';
-                            } else if (val.length < 8) {
-                              return 'Confirm Password must be at least 8 characters long';
+                            } else if (val.length < 6) {
+                              return 'Confirm Password must be at least 6 characters long';
                             }
                             return null;
                           },
