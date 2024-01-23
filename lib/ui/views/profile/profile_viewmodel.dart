@@ -24,12 +24,15 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
   late ProfileImageUpdateRequest _profileImageUpdateRequest;
   // ProfileImageUpdateResponse? profileImageUpdateResponse;
 
-  ProfileImageUpdateRequest get profileImageUpdateRequest => _profileImageUpdateRequest;
+  ProfileImageUpdateRequest get profileImageUpdateRequest =>
+      _profileImageUpdateRequest;
 
   Future<void> profileImage() async {
     profileImageUpdateRequest.id = int.parse(id);
     profileImageUpdateRequest.image = fileBytes;
-    final response = await runBusyFuture(_apiService.getProfileImage(profileImageUpdateRequest)).catchError((err) {
+    final response = await runBusyFuture(
+            _apiService.getProfileImage(profileImageUpdateRequest))
+        .catchError((err) {
       print(err);
     });
     if (hasError) {
@@ -44,11 +47,14 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
   String get mobile => _sharedPreference.getString('mobile') ?? '';
   // Uint8List get photo => const Base64Decoder().convert(_sharedPreference.getString('photo') ?? '');
   String get photo => _sharedPreference.getString('photo') ?? '';
-  String get updatedImage1 => _sharedPreference.getString('updateProfile').toString();
+  String get updatedImage1 =>
+      _sharedPreference.getString('updateProfile').toString();
 
   File? get image => _image;
   String? _fileBytes;
   String? get fileBytes => _fileBytes;
+
+  bool isExpanded = false;
 
   Future<void> logout() async {
     _sharedPreference.clear();
@@ -57,7 +63,8 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> pickImage() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage == null) {
       // User canceled the image picking
@@ -78,6 +85,7 @@ class ProfileViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 }

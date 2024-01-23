@@ -11,9 +11,9 @@ import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/services/api_service.dart';
 import 'package:vewin/services/user_authentication_service.dart';
 
-class SalesListViewModel extends BaseViewModel with NavigationMixin{
-SalesListViewModel(){
-   _monthlySaleRequest = MonthlySaleRequest();
+class SalesListViewModel extends BaseViewModel with NavigationMixin {
+  SalesListViewModel() {
+    _monthlySaleRequest = MonthlySaleRequest();
     // monthlySale();
   }
 

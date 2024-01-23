@@ -36,7 +36,7 @@ class ForgotPasswordViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> mobileNoVerified() async {
     forgotPasswordRequest.mobile = mobile;
-   
+
     forgotPasswordRequest.modifiedby = 'user';
     forgotPasswordRequest.modifiedon = DateTime.now();
     final response =

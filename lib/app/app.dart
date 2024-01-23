@@ -26,6 +26,7 @@ import 'package:vewin/ui/views/get_sales_details/get_sales_details_view.dart';
 import 'package:vewin/ui/views/app_customer_list/app_customer_list_view.dart';
 import 'package:vewin/ui/views/announcement_description/announcement_description_view.dart';
 import 'package:vewin/ui/views/sales_list/sales_list_view.dart';
+import 'package:vewin/ui/views/payment/payment_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -51,6 +52,7 @@ import 'package:vewin/ui/views/sales_list/sales_list_view.dart';
     MaterialRoute(page: AppCustomerListView),
     MaterialRoute(page: AnnouncementDescriptionView),
     MaterialRoute(page: SalesListView),
+    MaterialRoute(page: PaymentView),
 // @stacked-route
   ],
   dependencies: [

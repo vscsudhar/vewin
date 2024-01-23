@@ -16,6 +16,7 @@ import 'package:vewin/core/models/get_sales_details_model.dart';
 import 'package:vewin/core/models/login_response_model.dart';
 import 'package:vewin/core/models/monthly_sale_model.dart';
 import 'package:vewin/core/models/pan_add_model.dart';
+import 'package:vewin/core/models/payment_list_model.dart';
 import 'package:vewin/core/models/profile_imageUpdate_model.dart';
 import 'package:vewin/core/models/profile_image_model.dart';
 import 'package:vewin/core/models/profile_update_model.dart';
@@ -92,4 +93,7 @@ abstract class ApiService {
 
   @POST('/api/User/GetProfile?id={id}')
   Future<ProfileImageUpdateResponse> updateProfileImage(@Path('id') String id);
+
+  @POST('/api/Payment/GetPayment')
+  Future<List<PaymentListResponse>> payMentList(@Body() PaymentListRequest paymentListRequest);
 }

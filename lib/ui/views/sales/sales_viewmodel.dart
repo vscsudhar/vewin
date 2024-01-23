@@ -47,15 +47,23 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   List<AppSalesList> get appList => monthlySaleResponse?.appSalesList ?? [];
   List<AppSalesList> get totalsale => monthlySaleResponse?.appSalesList ?? [];
 
-  List<int?> get totalSaleAmt => totalsaleamt.map((e) => e.totalSale?.toInt()).toSet().toList();
-  List<String> get appname => appList.map((appElement) => appElement.appName.toString()).toSet().toList();
-  List<String> get salesAmt => appList.map((appElement) => appElement.sales.toString()).toSet().toList();
+  List<int?> get totalSaleAmt =>
+      totalsaleamt.map((e) => e.totalSale?.toInt()).toSet().toList();
+  List<String> get appname => appList
+      .map((appElement) => appElement.appName.toString())
+      .toSet()
+      .toList();
+  List<String> get salesAmt =>
+      appList.map((appElement) => appElement.sales.toString()).toSet().toList();
 
   String get token => _sharedPreference.getString('token') ?? '';
   String get id => _sharedPreference.getString('id') ?? '';
 
   Future<void> monthlySale() async {
-    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(
+            MonthlySaleRequest(
+                fromDate: fromDate, id: int.parse(id), toDate: toDate)))
+        .catchError((err) {
       print(err);
       if (hasError) {
         goToSales();
@@ -70,7 +78,8 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 
   final now = DateTime.now();
@@ -82,8 +91,10 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
 
   DateTime get toDate => _toDate ?? DateTime.now();
 
-  String get fDate => fromDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(fromDate);
-  String get tDate => toDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(toDate);
+  String get fDate =>
+      fromDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(fromDate);
+  String get tDate =>
+      toDate.toIso8601String(); //DateFormat('MM-dd-yyyy').format(toDate);
 
   Future<void> selectFromDate(BuildContext context) async {
     final DateTime? fromDate = await showDatePicker(
@@ -132,14 +143,18 @@ class SalesViewModel extends BaseViewModel with NavigationMixin {
   void notFound(context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('There was No sales History Please Valid FromDate and TODate'),
+        content:
+            Text('There was No sales History Please Valid FromDate and TODate'),
         duration: Duration(seconds: 2),
       ),
     );
   }
 
   Future<void> monthlySales() async {
-    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(MonthlySaleRequest(fromDate: fromDate, id: int.parse(id), toDate: toDate))).catchError((err) {
+    monthlySaleResponse = await runBusyFuture(_apiService.monthlySaleRes(
+            MonthlySaleRequest(
+                fromDate: fromDate, id: int.parse(id), toDate: toDate)))
+        .catchError((err) {
       print(err);
     });
     if (hasError) {

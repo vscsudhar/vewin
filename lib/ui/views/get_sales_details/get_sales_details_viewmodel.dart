@@ -35,22 +35,36 @@ class GetSalesDetailsViewModel extends BaseViewModel with NavigationMixin {
 
   String? get appPick => _sharedPreference.getString('appName') ?? '';
   String get id1 => _sharedPreference.getString('id') ?? '';
-  String get fdate => _sharedPreference.getString('fromdate') ?? DateTime(now.year, now.month, 1).toIso8601String();
-  String get tdate => _sharedPreference.getString('todate') ?? DateTime.now().toIso8601String();
+  String get fdate =>
+      _sharedPreference.getString('fromdate') ??
+      DateTime(now.year, now.month, 1).toIso8601String();
+  String get tdate =>
+      _sharedPreference.getString('todate') ?? DateTime.now().toIso8601String();
 
-  List<String> get name => salesDetails.map((element) => element.name.toString()).toSet().toList();
-  List<String> get id => salesDetails.map((element) => element.id.toString()).toSet().toList();
-  List<String> get amount => salesDetails.map((element) => element.amount.toString()).toSet().toList();
-  List<String> get saleDate => salesDetails.map((element) => element.date.toString()).toSet().toList();
+  List<String> get name =>
+      salesDetails.map((element) => element.name.toString()).toSet().toList();
+  List<String> get id =>
+      salesDetails.map((element) => element.id.toString()).toSet().toList();
+  List<String> get amount =>
+      salesDetails.map((element) => element.amount.toString()).toSet().toList();
+  List<String> get saleDate =>
+      salesDetails.map((element) => element.date.toString()).toSet().toList();
 
   Future<void> getSalesDetails() async {
-    _getSalesDetailsResponse = await runBusyFuture(_apiService.getSalesDetails(GetSalesDetailsRequest(appName: appPick, fromDate: DateTime.parse(fdate), id: int.parse(id1), toDate: DateTime.parse(tdate)))).catchError((err) {});
+    _getSalesDetailsResponse = await runBusyFuture(_apiService.getSalesDetails(
+            GetSalesDetailsRequest(
+                appName: appPick,
+                fromDate: DateTime.parse(fdate),
+                id: int.parse(id1),
+                toDate: DateTime.parse(tdate))))
+        .catchError((err) {});
     if (hasError) {
       showErrDialog('Something went Wrong');
     } else {}
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 }

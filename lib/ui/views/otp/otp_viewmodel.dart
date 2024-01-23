@@ -38,9 +38,14 @@ class OtpViewModel extends BaseViewModel with NavigationMixin {
     verifiedOtpRequest.otp = otp1;
     verifiedOtpRequest.modifiedby = 'user';
     verifiedOtpRequest.modifiedon = DateTime.now();
-    _verifiedOtpResponse = await runBusyFuture(_apiService.otpVerified(verifiedOtpRequest)).catchError((err) {
+    _verifiedOtpResponse =
+        await runBusyFuture(_apiService.otpVerified(verifiedOtpRequest))
+            .catchError((err) {
       print(err);
-      _dialogService.showCustomDialog(variant: DialogType.error, description: _verifiedOtpResponse.statusMessage.toString() ?? 'Something went wrong');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          description: _verifiedOtpResponse.statusMessage.toString() ??
+              'Something went wrong');
     });
     if (!hasError) {
       _verifiedOtpResponse.statusCode == 200;
@@ -49,7 +54,9 @@ class OtpViewModel extends BaseViewModel with NavigationMixin {
       _sharedPreference.clear();
       notifyListeners();
     } else {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: _verifiedOtpResponse.statusMessage.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          description: _verifiedOtpResponse.statusMessage.toString());
     }
   }
 
@@ -63,7 +70,8 @@ class OtpViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "message", description: message);
   }
 
   void setOtp(String otp) {

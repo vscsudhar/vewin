@@ -36,7 +36,7 @@ class HomeViewModel extends BaseViewModel with NavigationMixin {
       notifyListeners();
       await _userAuthenticationService.login(loginRequest);
       setBusy(false);
-      final token = _userAuthenticationService.loginResponse.token;
+      final token = _userAuthenticationService.loginResponse?.token;
       if (token != null) {
         _sharedPreference.setString('token', token);
       } else {

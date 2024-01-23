@@ -34,36 +34,39 @@ class VerifiedOtpResponse {
 //
 //     final verifiedOtpRequest = verifiedOtpRequestFromJson(jsonString);
 
+VerifiedOtpRequest verifiedOtpRequestFromJson(String str) =>
+    VerifiedOtpRequest.fromJson(json.decode(str));
 
-VerifiedOtpRequest verifiedOtpRequestFromJson(String str) => VerifiedOtpRequest.fromJson(json.decode(str));
-
-String verifiedOtpRequestToJson(VerifiedOtpRequest data) => json.encode(data.toJson());
+String verifiedOtpRequestToJson(VerifiedOtpRequest data) =>
+    json.encode(data.toJson());
 
 class VerifiedOtpRequest {
-    String? mobile;
-    String? otp;
-    String? modifiedby;
-    DateTime? modifiedon;
+  String? mobile;
+  String? otp;
+  String? modifiedby;
+  DateTime? modifiedon;
 
-    VerifiedOtpRequest({
-        this.mobile,
-        this.otp,
-        this.modifiedby,
-        this.modifiedon,
-    });
+  VerifiedOtpRequest({
+    this.mobile,
+    this.otp,
+    this.modifiedby,
+    this.modifiedon,
+  });
 
-    factory VerifiedOtpRequest.fromJson(Map<String, dynamic> json) => VerifiedOtpRequest(
+  factory VerifiedOtpRequest.fromJson(Map<String, dynamic> json) =>
+      VerifiedOtpRequest(
         mobile: json["mobile"],
         otp: json["otp"],
         modifiedby: json["modifiedby"],
-        modifiedon: json["modifiedon"] == null ? null : DateTime.parse(json["modifiedon"]),
-    );
+        modifiedon: json["modifiedon"] == null
+            ? null
+            : DateTime.parse(json["modifiedon"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "mobile": mobile,
         "otp": otp,
         "modifiedby": modifiedby,
         "modifiedon": modifiedon?.toIso8601String(),
-    };
+      };
 }
-

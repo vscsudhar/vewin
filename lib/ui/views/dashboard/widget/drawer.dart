@@ -10,7 +10,8 @@ import 'package:vewin/ui/views/dashboard/dashboard_viewmodel.dart';
 class DrawerView extends StackedView<DashboardViewModel> {
   const DrawerView({super.key});
 
-  static final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+  static final GlobalKey<AnimatedListState> listKey =
+      GlobalKey<AnimatedListState>();
 
   @override
   Widget builder(
@@ -20,8 +21,10 @@ class DrawerView extends StackedView<DashboardViewModel> {
   ) {
     return Drawer(
       child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          buildHeader(context, viewModel.photo, viewModel.name, viewModel.id, viewModel.updateImage1),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          buildHeader(context, viewModel.photo, viewModel.name, viewModel.id,
+              viewModel.updateImage1),
           buildMenuItems(context, viewModel),
         ]),
       ),
@@ -72,7 +75,8 @@ class DrawerView extends StackedView<DashboardViewModel> {
         ]),
       );
 
-  Widget buildMenuItems(BuildContext context, DashboardViewModel viewModel) => Column(
+  Widget buildMenuItems(BuildContext context, DashboardViewModel viewModel) =>
+      Column(
         children: [
           ListTile(
               leading: Image.asset(
@@ -157,5 +161,6 @@ class DrawerView extends StackedView<DashboardViewModel> {
       );
 
   @override
-  DashboardViewModel viewModelBuilder(BuildContext context) => DashboardViewModel();
+  DashboardViewModel viewModelBuilder(BuildContext context) =>
+      DashboardViewModel();
 }

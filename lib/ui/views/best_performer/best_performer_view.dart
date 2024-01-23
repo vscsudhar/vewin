@@ -38,16 +38,16 @@ class BestPerformerView extends StackedView<BestPerformerViewModel> {
                   child: Column(
                     children: [
                       verticalSpacing20,
-                      viewModel.bestperformImage == null
+                      viewModel.bestperformImage != null
                           ? CircleAvatar(
                               radius: 50,
                               backgroundColor: appViking,
                               child: ClipOval(
-                                child: Image.asset(
-                                  'assets/gif/person.gif',
+                                child: Image.network(
+                                  viewModel.bestperformImage.join(),
+                                  width: 140 * 2,
+                                  height: 140 * 2,
                                   fit: BoxFit.cover,
-                                  width: 100, // Adjust the width and height as needed
-                                  height: 100,
                                 ),
                               ),
                             )
@@ -56,11 +56,12 @@ class BestPerformerView extends StackedView<BestPerformerViewModel> {
                                 radius: 70,
                                 backgroundColor: Colors.transparent,
                                 child: ClipOval(
-                                  child: Image.network(
-                                    viewModel.bestperformImage.join(),
-                                    width: 140 * 2,
-                                    height: 140 * 2,
+                                  child: Image.asset(
+                                    'assets/gif/person.gif',
                                     fit: BoxFit.cover,
+                                    width:
+                                        100, // Adjust the width and height as needed
+                                    height: 100,
                                   ),
                                 ),
                               ),

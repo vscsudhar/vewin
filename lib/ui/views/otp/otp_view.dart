@@ -48,7 +48,9 @@ class OtpView extends StackedView<OtpViewModel> {
                         maxLength: 4,
                         hintText: 'OTP',
                         hintStyle: fontFamilyRegular,
-                        validator: (val) => val == null || val.isEmpty ? 'OTP is required' : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? 'OTP is required'
+                            : null,
                         onSaved: (otp) => viewModel.setOtp(otp.toString()),
                       ),
                       // OtpTextField(

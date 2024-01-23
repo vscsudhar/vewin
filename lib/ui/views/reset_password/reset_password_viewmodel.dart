@@ -45,19 +45,25 @@ class ResetPasswordViewModel extends BaseViewModel with NavigationMixin {
     updatePasswordRequest.modifiedby = 'user';
     updatePasswordRequest.modifiedon = DateTime.now();
     if (updatePasswordRequest.password == confirmPass) {
-      final updateresponse = await runBusyFuture(_apiService.updatePass(updatePasswordRequest)).catchError((err, stackTrace) {
+      final updateresponse =
+          await runBusyFuture(_apiService.updatePass(updatePasswordRequest))
+              .catchError((err, stackTrace) {
         print(err);
         showErrDialog('Something Went Wrong');
         return err;
       });
       if (!hasError) {
-        _dialogService.showCustomDialog(title: 'message', description: updateresponse.statusMessage.toString());
+        _dialogService.showCustomDialog(
+            title: 'message',
+            description: updateresponse.statusMessage.toString());
         updateresponse.statusCode == 200;
         notifyListeners();
         goToLogin();
         _sharedPreference.clear();
       } else {
-        _dialogService.showCustomDialog(title: 'message', description: updateresponse.statusMessage.toString());
+        _dialogService.showCustomDialog(
+            title: 'message',
+            description: updateresponse.statusMessage.toString());
       }
     } else {
       showErrDialog('Miss Match PassWord');
@@ -65,7 +71,8 @@ class ResetPasswordViewModel extends BaseViewModel with NavigationMixin {
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Error", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Error", description: message);
   }
 
   void setpass(String password) {

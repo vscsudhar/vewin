@@ -37,7 +37,7 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                           height: 250,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: BoxDecoration(
-                              color: appcolororenge,//const Color(0xFF571E90),
+                              color: appcolororenge, //const Color(0xFF571E90),
                               border: Border.all(),
                               borderRadius: BorderRadius.circular(15)),
                           child: Center(
@@ -46,11 +46,14 @@ class TextHeaderCarousel extends StackedView<DashboardViewModel> {
                               children: [
                                 verticalSpacing4,
                                 Padding(
-                                  padding: leftPadding10 + rightPadding10 + topPadding8,
+                                  padding: leftPadding10 +
+                                      rightPadding10 +
+                                      topPadding8,
                                   child: Text(
                                     annoncement.title ?? '',
                                     textAlign: TextAlign.center,
-                                    style: fontFamilyMedium.size18.black,
+                                    style: fontFamilyMedium.size18.black
+                                        .copyWith(fontStyle: FontStyle.italic),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
                                   ),

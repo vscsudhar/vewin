@@ -5,11 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i23;
+import 'package:flutter/material.dart' as _i24;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i25;
-import 'package:vewin/core/models/login_response_model.dart' as _i24;
+import 'package:stacked_services/stacked_services.dart' as _i26;
+import 'package:vewin/core/models/login_response_model.dart' as _i25;
 import 'package:vewin/ui/views/announcement_description/announcement_description_view.dart'
     as _i21;
 import 'package:vewin/ui/views/app_customer_list/app_customer_list_view.dart'
@@ -28,6 +28,7 @@ import 'package:vewin/ui/views/history/history_view.dart' as _i14;
 import 'package:vewin/ui/views/home/home_view.dart' as _i2;
 import 'package:vewin/ui/views/otp/otp_view.dart' as _i15;
 import 'package:vewin/ui/views/pan/pan_view.dart' as _i12;
+import 'package:vewin/ui/views/payment/payment_view.dart' as _i23;
 import 'package:vewin/ui/views/profile/profile_view.dart' as _i7;
 import 'package:vewin/ui/views/register/register_view.dart' as _i4;
 import 'package:vewin/ui/views/reset_password/reset_password_view.dart' as _i17;
@@ -80,6 +81,8 @@ class Routes {
 
   static const salesListView = '/sales-list-view';
 
+  static const paymentView = '/payment-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -102,6 +105,7 @@ class Routes {
     appCustomerListView,
     announcementDescriptionView,
     salesListView,
+    paymentView,
   };
 }
 
@@ -191,119 +195,123 @@ class StackedRouter extends _i1.RouterBase {
       Routes.salesListView,
       page: _i22.SalesListView,
     ),
+    _i1.RouteDef(
+      Routes.paymentView,
+      page: _i23.PaymentView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.RegisterView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.RegisterView(),
         settings: data,
       );
     },
     _i5.DashboardView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.DashboardView(),
         settings: data,
       );
     },
     _i6.ChangePasswordView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ChangePasswordView(),
         settings: data,
       );
     },
     _i7.ProfileView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ProfileView(),
         settings: data,
       );
     },
     _i8.SalesView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.SalesView(),
         settings: data,
       );
     },
     _i9.BestPerformerView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.BestPerformerView(),
         settings: data,
       );
     },
     _i10.CustomerListView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.CustomerListView(),
         settings: data,
       );
     },
     _i11.WalletInfoView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.WalletInfoView(),
         settings: data,
       );
     },
     _i12.PanView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.PanView(),
         settings: data,
       );
     },
     _i13.BankAccountView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.BankAccountView(),
         settings: data,
       );
     },
     _i14.HistoryView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.HistoryView(),
         settings: data,
       );
     },
     _i15.OtpView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.OtpView(),
         settings: data,
       );
     },
     _i16.ForgotPasswordView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.ForgotPasswordView(),
         settings: data,
       );
     },
     _i17.ResetPasswordView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.ResetPasswordView(),
         settings: data,
       );
     },
     _i18.SetPasswordView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.SetPasswordView(),
         settings: data,
       );
     },
     _i19.GetSalesDetailsView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.GetSalesDetailsView(),
         settings: data,
       );
     },
     _i20.AppCustomerListView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.AppCustomerListView(),
         settings: data,
       );
@@ -311,15 +319,21 @@ class StackedRouter extends _i1.RouterBase {
     _i21.AnnouncementDescriptionView: (data) {
       final args =
           data.getArgs<AnnouncementDescriptionViewArguments>(nullOk: false);
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i21.AnnouncementDescriptionView(args.announcement, key: args.key),
         settings: data,
       );
     },
     _i22.SalesListView: (data) {
-      return _i23.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i22.SalesListView(),
+        settings: data,
+      );
+    },
+    _i23.PaymentView: (data) {
+      return _i24.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i23.PaymentView(),
         settings: data,
       );
     },
@@ -338,9 +352,9 @@ class AnnouncementDescriptionViewArguments {
     this.key,
   });
 
-  final _i24.Announcement announcement;
+  final _i25.Announcement announcement;
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -359,7 +373,7 @@ class AnnouncementDescriptionViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i25.NavigationService {
+extension NavigatorStateExtension on _i26.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -627,8 +641,8 @@ extension NavigatorStateExtension on _i25.NavigationService {
   }
 
   Future<dynamic> navigateToAnnouncementDescriptionView({
-    required _i24.Announcement announcement,
-    _i23.Key? key,
+    required _i25.Announcement announcement,
+    _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -652,6 +666,20 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.salesListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToPaymentView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.paymentView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -925,8 +953,8 @@ extension NavigatorStateExtension on _i25.NavigationService {
   }
 
   Future<dynamic> replaceWithAnnouncementDescriptionView({
-    required _i24.Announcement announcement,
-    _i23.Key? key,
+    required _i25.Announcement announcement,
+    _i24.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -950,6 +978,20 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.salesListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPaymentView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.paymentView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

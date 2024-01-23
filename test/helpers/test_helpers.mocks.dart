@@ -19,6 +19,7 @@ import 'package:vewin/core/models/get_sales_details_model.dart' as _i19;
 import 'package:vewin/core/models/login_response_model.dart' as _i7;
 import 'package:vewin/core/models/monthly_sale_model.dart' as _i11;
 import 'package:vewin/core/models/pan_add_model.dart' as _i8;
+import 'package:vewin/core/models/payment_list_model.dart' as _i23;
 import 'package:vewin/core/models/profile_image_model.dart' as _i22;
 import 'package:vewin/core/models/profile_imageUpdate_model.dart' as _i13;
 import 'package:vewin/core/models/profile_update_model.dart' as _i10;
@@ -26,7 +27,7 @@ import 'package:vewin/core/models/regiseter_verified_otp_model.dart' as _i3;
 import 'package:vewin/core/models/register_model.dart' as _i2;
 import 'package:vewin/core/models/update_pass_verify.dart' as _i6;
 import 'package:vewin/services/api_service.dart' as _i18;
-import 'package:vewin/services/user_authentication_service.dart' as _i23;
+import 'package:vewin/services/user_authentication_service.dart' as _i24;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -1189,13 +1190,28 @@ class MockApiService extends _i1.Mock implements _i18.ApiService {
           ),
         )),
       ) as _i16.Future<_i13.ProfileImageUpdateResponse>);
+
+  @override
+  _i16.Future<List<_i23.PaymentListResponse>> payMentList(
+          _i23.PaymentListRequest? paymentListRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #payMentList,
+          [paymentListRequest],
+        ),
+        returnValue: _i16.Future<List<_i23.PaymentListResponse>>.value(
+            <_i23.PaymentListResponse>[]),
+        returnValueForMissingStub:
+            _i16.Future<List<_i23.PaymentListResponse>>.value(
+                <_i23.PaymentListResponse>[]),
+      ) as _i16.Future<List<_i23.PaymentListResponse>>);
 }
 
 /// A class which mocks [UserAuthenticationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserAuthenticationService extends _i1.Mock
-    implements _i23.UserAuthenticationService {
+    implements _i24.UserAuthenticationService {
   @override
   String get token => (super.noSuchMethod(
         Invocation.getter(#token),
@@ -1209,19 +1225,6 @@ class MockUserAuthenticationService extends _i1.Mock
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
-
-  @override
-  _i7.LoginResponse get loginResponse => (super.noSuchMethod(
-        Invocation.getter(#loginResponse),
-        returnValue: _FakeLoginResponse_5(
-          this,
-          Invocation.getter(#loginResponse),
-        ),
-        returnValueForMissingStub: _FakeLoginResponse_5(
-          this,
-          Invocation.getter(#loginResponse),
-        ),
-      ) as _i7.LoginResponse);
 
   @override
   _i16.Future<dynamic> login(_i7.LoginRequest? loginRequest) =>
@@ -1419,6 +1422,15 @@ class MockUserAuthenticationService extends _i1.Mock
   void goToSetPassOtp() => super.noSuchMethod(
         Invocation.method(
           #goToSetPassOtp,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void goToPayment() => super.noSuchMethod(
+        Invocation.method(
+          #goToPayment,
           [],
         ),
         returnValueForMissingStub: null,

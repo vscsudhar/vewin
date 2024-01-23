@@ -29,7 +29,7 @@ class SalesListView extends StackedView<SalesListViewModel> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body:  Column(children: [
+        body: Column(children: [
           SingleChildScrollView(
               child: Padding(
             padding: defaultPadding12,
@@ -46,26 +46,26 @@ class SalesListView extends StackedView<SalesListViewModel> {
                   height: 500,
                   width: 400,
                   color: appcolororenge,
-                  child:  ListView.builder(
-              itemCount: viewModel.totalsale.length,
-              itemBuilder: (context, index) => ListTile(
-                onTap: () => viewModel.appPick(viewModel.appname[index]),
-                title: Row(
-                  children: [
-                    Text(
-                      viewModel.totalsale[index].appName.toString(),
-                      style: fontFamilyMedium.size16,
+                  child: ListView.builder(
+                    itemCount: viewModel.totalsale.length,
+                    itemBuilder: (context, index) => ListTile(
+                      onTap: () => viewModel.appPick(viewModel.appname[index]),
+                      title: Row(
+                        children: [
+                          Text(
+                            viewModel.totalsale[index].appName.toString(),
+                            style: fontFamilyMedium.size16,
+                          ),
+                          horizontalDivider,
+                          const Spacer(),
+                          Text(
+                            viewModel.totalsale[index].sales.toString(),
+                            style: fontFamilyMedium.size16,
+                          ),
+                        ],
+                      ),
                     ),
-                    horizontalDivider,
-                    const Spacer(),
-                    Text(
-                      viewModel.totalsale[index].sales.toString(),
-                      style: fontFamilyMedium.size16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
                 )
               ],
             ),

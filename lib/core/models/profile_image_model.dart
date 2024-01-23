@@ -2,7 +2,6 @@
 //
 //     final profileImageUpdateRequest = profileImageUpdateRequestFromJson(jsonString);
 
-
 // To parse this JSON data, do
 //
 //     final profileImageUpdateResponse = profileImageUpdateResponseFromJson(jsonString);
@@ -36,26 +35,29 @@ import 'dart:typed_data';
 
 // import 'dart:convert';
 
-ProfileImageUpdateRequest profileImageUpdateRequestFromJson(String str) => ProfileImageUpdateRequest.fromJson(json.decode(str));
+ProfileImageUpdateRequest profileImageUpdateRequestFromJson(String str) =>
+    ProfileImageUpdateRequest.fromJson(json.decode(str));
 
-String profileImageUpdateRequestToJson(ProfileImageUpdateRequest data) => json.encode(data.toJson());
+String profileImageUpdateRequestToJson(ProfileImageUpdateRequest data) =>
+    json.encode(data.toJson());
 
 class ProfileImageUpdateRequest {
-    int? id;
-    String? image;
+  int? id;
+  String? image;
 
-    ProfileImageUpdateRequest({
-        this.id,
-        this.image,
-    });
+  ProfileImageUpdateRequest({
+    this.id,
+    this.image,
+  });
 
-    factory ProfileImageUpdateRequest.fromJson(Map<String, dynamic> json) => ProfileImageUpdateRequest(
+  factory ProfileImageUpdateRequest.fromJson(Map<String, dynamic> json) =>
+      ProfileImageUpdateRequest(
         id: json["id"],
         image: json["image"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "image": image,
-    };
+      };
 }

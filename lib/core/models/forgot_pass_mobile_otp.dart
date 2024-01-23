@@ -4,34 +4,38 @@
 
 import 'dart:convert';
 
-ForgotPasswordRequest forgotPasswordRequestFromJson(String str) => ForgotPasswordRequest.fromJson(json.decode(str));
+ForgotPasswordRequest forgotPasswordRequestFromJson(String str) =>
+    ForgotPasswordRequest.fromJson(json.decode(str));
 
-String forgotPasswordRequestToJson(ForgotPasswordRequest data) => json.encode(data.toJson());
+String forgotPasswordRequestToJson(ForgotPasswordRequest data) =>
+    json.encode(data.toJson());
 
 class ForgotPasswordRequest {
-    String? mobile;
-    String? modifiedby;
-    DateTime? modifiedon;
+  String? mobile;
+  String? modifiedby;
+  DateTime? modifiedon;
 
-    ForgotPasswordRequest({
-        this.mobile,
-        this.modifiedby,
-        this.modifiedon,
-    });
+  ForgotPasswordRequest({
+    this.mobile,
+    this.modifiedby,
+    this.modifiedon,
+  });
 
-    factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) => ForgotPasswordRequest(
+  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) =>
+      ForgotPasswordRequest(
         mobile: json["mobile"],
         modifiedby: json["modifiedby"],
-        modifiedon: json["modifiedon"] == null ? null : DateTime.parse(json["modifiedon"]),
-    );
+        modifiedon: json["modifiedon"] == null
+            ? null
+            : DateTime.parse(json["modifiedon"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "mobile": mobile,
         "modifiedby": modifiedby,
         "modifiedon": modifiedon?.toIso8601String(),
-    };
+      };
 }
-
 
 ForgotPasswordResponse forgotPasswordResponseFromJson(String str) =>
     ForgotPasswordResponse.fromJson(json.decode(str));

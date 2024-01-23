@@ -55,7 +55,9 @@ class SalesView extends StackedView<SalesViewModel> {
                               InkWell(
                                 onTap: () => viewModel.selectFromDate(context),
                                 child: Container(
-                                  margin: const EdgeInsets.only(top: 12) + leftPadding10 + rightPadding10,
+                                  margin: const EdgeInsets.only(top: 12) +
+                                      leftPadding10 +
+                                      rightPadding10,
                                   padding: defaultPadding12,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -71,9 +73,11 @@ class SalesView extends StackedView<SalesViewModel> {
                                     ],
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(DateFormat.yMMMEd().format(viewModel.fromDate)),
+                                      Text(DateFormat.yMMMEd()
+                                          .format(viewModel.fromDate)),
                                       const Icon(Icons.calendar_today),
                                     ],
                                   ),
@@ -90,7 +94,9 @@ class SalesView extends StackedView<SalesViewModel> {
                               InkWell(
                                 onTap: () => viewModel.selectToDate(context),
                                 child: Container(
-                                  margin: const EdgeInsets.only(top: 12) + leftPadding10 + rightPadding10,
+                                  margin: const EdgeInsets.only(top: 12) +
+                                      leftPadding10 +
+                                      rightPadding10,
                                   padding: defaultPadding12,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -106,9 +112,11 @@ class SalesView extends StackedView<SalesViewModel> {
                                     ],
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(DateFormat.yMMMEd().format(viewModel.toDate)),
+                                      Text(DateFormat.yMMMEd()
+                                          .format(viewModel.toDate)),
                                       const Icon(Icons.calendar_today),
                                     ],
                                   ),
@@ -131,10 +139,14 @@ class SalesView extends StackedView<SalesViewModel> {
                                         children: [
                                           Center(
                                             child: Container(
-                                              width: MediaQuery.of(context).size.width * 0.90,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.90,
                                               height: 370,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(15),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                                 color: appChambray,
                                               ),
                                               child: Padding(
@@ -142,30 +154,56 @@ class SalesView extends StackedView<SalesViewModel> {
                                                 child: Stack(
                                                   children: [
                                                     Padding(
-                                                      padding: topPadding40 + topPadding10,
+                                                      padding: topPadding40 +
+                                                          topPadding10,
                                                       child: Container(
-                                                        width: MediaQuery.of(context).size.width * 90,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            90,
                                                         // height: MediaQuery.of(context).size.height * 90,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(10),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                         ),
                                                         child: ListView.builder(
-                                                          itemCount: viewModel.totalsale.length,
-                                                          itemBuilder: (context, index) => ListTile(
-                                                            onTap: () => viewModel.appPick(viewModel.appname[index]),
+                                                          itemCount: viewModel
+                                                              .totalsale.length,
+                                                          itemBuilder: (context,
+                                                                  index) =>
+                                                              ListTile(
+                                                            onTap: () => viewModel
+                                                                .appPick(viewModel
+                                                                        .appname[
+                                                                    index]),
                                                             // print(viewModel.appname[index]
 
                                                             title: Row(
                                                               children: [
                                                                 Text(
-                                                                  viewModel.totalsale[index].appName.toString(),
-                                                                  style: fontFamilyMedium.size16.appViking1,
+                                                                  viewModel
+                                                                      .totalsale[
+                                                                          index]
+                                                                      .appName
+                                                                      .toString(),
+                                                                  style: fontFamilyMedium
+                                                                      .size16
+                                                                      .appViking1,
                                                                 ),
                                                                 horizontalDivider,
                                                                 const Spacer(),
                                                                 Text(
-                                                                  viewModel.totalsale[index].sales.toString(),
-                                                                  style: fontFamilyMedium.size16.appwhite,
+                                                                  viewModel
+                                                                      .totalsale[
+                                                                          index]
+                                                                      .sales
+                                                                      .toString(),
+                                                                  style: fontFamilyMedium
+                                                                      .size16
+                                                                      .appwhite,
                                                                 ),
                                                               ],
                                                             ),
@@ -174,32 +212,52 @@ class SalesView extends StackedView<SalesViewModel> {
                                                       ),
                                                     ),
                                                     Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Padding(
-                                                          padding: defaultPadding12,
+                                                          padding:
+                                                              defaultPadding12,
                                                           child: Row(
                                                             children: [
                                                               Text(
                                                                 'Application',
-                                                                style: fontFamilyBold.appwhite.size20,
+                                                                style:
+                                                                    fontFamilyBold
+                                                                        .appwhite
+                                                                        .size20,
                                                               ),
                                                               const Spacer(),
                                                               Text(
                                                                 'Amount',
-                                                                style: fontFamilyBold.appwhite.size20,
+                                                                style:
+                                                                    fontFamilyBold
+                                                                        .appwhite
+                                                                        .size20,
                                                               ),
                                                             ],
                                                           ),
                                                         ),
                                                         const Spacer(),
                                                         Container(
-                                                          width: MediaQuery.of(context).size.width * 1,
-                                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: appViking),
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              1,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15),
+                                                              color: appViking),
                                                           child: Center(
                                                             child: Text(
                                                               'Total Sale : ${viewModel.totalSaleAmt.join()}',
-                                                              style: fontFamilyBold.size18,
+                                                              style:
+                                                                  fontFamilyBold
+                                                                      .size18,
                                                             ),
                                                           ),
                                                         )
@@ -220,8 +278,10 @@ class SalesView extends StackedView<SalesViewModel> {
                                     )
                                   : const Center(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Text('data is not available'),
                                         ],

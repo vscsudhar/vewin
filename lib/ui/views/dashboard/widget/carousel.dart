@@ -17,7 +17,8 @@ class ImageCarousel extends StackedView<DashboardViewModel> {
   ];
 
   @override
-  Widget builder(BuildContext context, DashboardViewModel viewModel, Widget? child) {
+  Widget builder(
+      BuildContext context, DashboardViewModel viewModel, Widget? child) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -30,7 +31,8 @@ class ImageCarousel extends StackedView<DashboardViewModel> {
                 return InkWell(
                   onTap: () => viewModel.banner,
                   child: Container(
-                    width: screenWidth, // Use screenWidth instead of double.infinity
+                    width:
+                        screenWidth, // Use screenWidth instead of double.infinity
                     height: 200,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
@@ -77,7 +79,8 @@ class ImageCarousel extends StackedView<DashboardViewModel> {
               margin: const EdgeInsets.symmetric(horizontal: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: viewModel.currentIndex == index ? Colors.blue : Colors.grey,
+                color:
+                    viewModel.currentIndex == index ? Colors.blue : Colors.grey,
               ),
             );
           }).toList(),
@@ -87,5 +90,6 @@ class ImageCarousel extends StackedView<DashboardViewModel> {
   }
 
   @override
-  DashboardViewModel viewModelBuilder(BuildContext context) => DashboardViewModel();
+  DashboardViewModel viewModelBuilder(BuildContext context) =>
+      DashboardViewModel();
 }

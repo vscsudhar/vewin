@@ -167,25 +167,25 @@ class DashboardView extends StackedView<DashboardViewModel> {
                       horizontalSpacing12,
                       Expanded(
                         child: Box(
-                            onTap: () => viewModel.goToWalletInfo(),
+                            onTap: () => viewModel.goToPayment(),
                             boxColor: appcolororenge,
                             margin: zeroPadding,
                             padding: defaultPadding12,
                             child: Column(
                               children: [
                                 Text(
-                                  "Wallet Info",
+                                  "Payment",
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
                                 Image.asset(
-                                  'assets/icons/wallet1.png',
+                                  'assets/icons/money.png',
                                   width: 50,
                                   height: 60,
                                 ),
                                 horizontalSpacing20,
                                 Text(
-                                  "Rs.1",
+                                  "0",
                                   style: fontFamilyBold.size18,
                                   textAlign: TextAlign.center,
                                 ),
@@ -194,6 +194,38 @@ class DashboardView extends StackedView<DashboardViewModel> {
                       ),
                     ],
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //   Expanded(
+                  //       child: Box(
+                  //           onTap: () => viewModel.goToWalletInfo(),
+                  //           boxColor: appcolororenge,
+                  //           margin: zeroPadding,
+                  //           padding: defaultPadding12,
+                  //           child: Column(
+                  //             children: [
+                  //               Text(
+                  //                 "Wallet Info",
+                  //                 style: fontFamilyBold.size18,
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //               Image.asset(
+                  //                 'assets/icons/wallet1.png',
+                  //                 width: 50,
+                  //                 height: 60,
+                  //               ),
+                  //               horizontalSpacing20,
+                  //               Text(
+                  //                 "Rs.1",
+                  //                 style: fontFamilyBold.size18,
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //             ],
+                  //           )),
+                  //     ),
+                  //   ],
+                  // ),
                 ]),
               ),
             )

@@ -80,38 +80,41 @@ class Errors {
 
 // import 'dart:convert';
 
-RegisterRequest registerRequestFromJson(String str) => RegisterRequest.fromJson(json.decode(str));
+RegisterRequest registerRequestFromJson(String str) =>
+    RegisterRequest.fromJson(json.decode(str));
 
-String registerRequestToJson(RegisterRequest data) => json.encode(data.toJson());
+String registerRequestToJson(RegisterRequest data) =>
+    json.encode(data.toJson());
 
 class RegisterRequest {
-    String? name;
-    String? mobile;
-    String? email;
-    String? address;
-    String? pincode;
-    String? password;
-    String? usertype;
-    String? createdby;
-    DateTime? createdon;
-    String? modifiedby;
-    DateTime? modifiedon;
+  String? name;
+  String? mobile;
+  String? email;
+  String? address;
+  String? pincode;
+  String? password;
+  String? usertype;
+  String? createdby;
+  DateTime? createdon;
+  String? modifiedby;
+  DateTime? modifiedon;
 
-    RegisterRequest({
-        this.name,
-        this.mobile,
-        this.email,
-        this.address,
-        this.pincode,
-        this.password,
-        this.usertype,
-        this.createdby,
-        this.createdon,
-        this.modifiedby,
-        this.modifiedon,
-    });
+  RegisterRequest({
+    this.name,
+    this.mobile,
+    this.email,
+    this.address,
+    this.pincode,
+    this.password,
+    this.usertype,
+    this.createdby,
+    this.createdon,
+    this.modifiedby,
+    this.modifiedon,
+  });
 
-    factory RegisterRequest.fromJson(Map<String, dynamic> json) => RegisterRequest(
+  factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
+      RegisterRequest(
         name: json["name"],
         mobile: json["mobile"],
         email: json["email"],
@@ -120,12 +123,16 @@ class RegisterRequest {
         password: json["password"],
         usertype: json["usertype"],
         createdby: json["createdby"],
-        createdon: json["createdon"] == null ? null : DateTime.parse(json["createdon"]),
+        createdon: json["createdon"] == null
+            ? null
+            : DateTime.parse(json["createdon"]),
         modifiedby: json["modifiedby"],
-        modifiedon: json["modifiedon"] == null ? null : DateTime.parse(json["modifiedon"]),
-    );
+        modifiedon: json["modifiedon"] == null
+            ? null
+            : DateTime.parse(json["modifiedon"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name,
         "mobile": mobile,
         "email": email,
@@ -137,5 +144,5 @@ class RegisterRequest {
         "createdon": createdon?.toIso8601String(),
         "modifiedby": modifiedby,
         "modifiedon": modifiedon?.toIso8601String(),
-    };
+      };
 }
