@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/common/shared/text_style_helpers.dart';
-import 'package:vewin/ui/views/payment/widgets/payment_list.dart';
 
 import 'payment_viewmodel.dart';
 
