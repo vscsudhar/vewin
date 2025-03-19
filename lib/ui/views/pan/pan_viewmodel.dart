@@ -31,53 +31,53 @@ class PanViewModel extends BaseViewModel with NavigationMixin {
   String? get pan => _pan;
   DateTime get dob => _dob ?? DateTime(1996);
 
-  Future<void> selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2100),
-    );
+  // Future<void> selectDate(BuildContext context) async {
+  //   final DateTime? pickedDate = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2023),
+  //     lastDate: DateTime(2100),
+  //   );
 
-    if (pickedDate != null) {
-      _dob = pickedDate;
-      notifyListeners();
-    }
-  }
+  //   if (pickedDate != null) {
+  //     _dob = pickedDate;
+  //     notifyListeners();
+  //   }
+  // }
 
-  Future<void> panAddDetails() async {
-    panAddRequest.createdby = 'user';
-    panAddRequest.createdon = DateTime.now();
-    panAddRequest.dob = dob;
-    panAddRequest.id = 0;
-    panAddRequest.isdeleted = 'a';
-    panAddRequest.modifiedby = 'user';
-    panAddRequest.modifiedon = DateTime.now();
-    panAddRequest.pan = pan;
-    final panNoAddResponse =
-        await runBusyFuture(_apiService.panAdd(panAddRequest))
-            .catchError((err) {
-      print(err);
-      _dialogService.showDialog(title: 'Error', description: 'PAN Add Failed');
-    });
-    if (panNoAddResponse.statusCode == 200) {
-      goToWalletInfo();
-    } else {
-      showErrDialog(panNoAddResponse.statusMessage.toString());
-    }
-  }
+  // Future<void> panAddDetails() async {
+  //   panAddRequest.createdby = 'user';
+  //   panAddRequest.createdon = DateTime.now();
+  //   panAddRequest.dob = dob;
+  //   panAddRequest.id = 0;
+  //   panAddRequest.isdeleted = 'a';
+  //   panAddRequest.modifiedby = 'user';
+  //   panAddRequest.modifiedon = DateTime.now();
+  //   panAddRequest.pan = pan;
+  //   final panNoAddResponse =
+  //       await runBusyFuture(_apiService.panAdd(panAddRequest))
+  //           .catchError((err) {
+  //     print(err);
+  //     _dialogService.showDialog(title: 'Error', description: 'PAN Add Failed');
+  //   });
+  //   if (panNoAddResponse.statusCode == 200) {
+  //     goToWalletInfo();
+  //   } else {
+  //     showErrDialog(panNoAddResponse.statusMessage.toString());
+  //   }
+  // }
 
-  void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Error", description: message);
-  }
+  // void showErrDialog(String message) {
+  //   _dialogService.showCustomDialog(
+  //       variant: DialogType.error, title: "Error", description: message);
+  // }
 
-  void panlength(String pan) {
-    if (pan.length == 10) {
-      _pan = pan;
-      notifyListeners();
-    } else {
-      showErrDialog('Pan 10 digit Must');
-    }
-  }
+  // void panlength(String pan) {
+  //   if (pan.length == 10) {
+  //     _pan = pan;
+  //     notifyListeners();
+  //   } else {
+  //     showErrDialog('Pan 10 digit Must');
+  //   }
+  // }
 }

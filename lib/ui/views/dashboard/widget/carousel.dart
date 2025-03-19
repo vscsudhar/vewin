@@ -5,16 +5,16 @@ import 'package:vewin/ui/common/shared/styles.dart';
 import 'package:vewin/ui/views/dashboard/dashboard_viewmodel.dart';
 
 class ImageCarousel extends StackedView<DashboardViewModel> {
-  ImageCarousel({Key? key}) : super(key: key);
+  const ImageCarousel({Key? key}) : super(key: key);
 
   final int currentIndex = 0;
 
-  final List<String> image = [
-    'assets/images/offer4.jpg',
-    'assets/images/offer3.jpg',
-    'assets/images/offer2.png',
-    'assets/images/offer1.jpg',
-  ];
+  // final List<String> image = [
+  //   'assets/images/offer4.jpg',
+  //   'assets/images/offer3.jpg',
+  //   'assets/images/offer2.png',
+  //   'assets/images/offer1.jpg',
+  // ];
 
   @override
   Widget builder(

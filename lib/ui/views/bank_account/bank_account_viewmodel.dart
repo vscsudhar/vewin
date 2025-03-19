@@ -38,39 +38,39 @@ class BankAccountViewModel extends BaseViewModel with NavigationMixin {
   String? get state => _state;
   String? get confirmacc => _confirmaccNo;
 
-  Future<void> addBankAccount() async {
-    bankAccountAddRequest.createdby = 'user';
-    bankAccountAddRequest.createdon = DateTime.now();
-    bankAccountAddRequest.id = 0;
-    bankAccountAddRequest.isdeleted = 'a';
-    bankAccountAddRequest.modifiedby = 'user';
-    bankAccountAddRequest.modifiedon = DateTime.now();
-    if (bankAccountAddRequest.accNo == confirmacc) {
-      final bankAccountAddResponse =
-          await runBusyFuture(_apiService.addBank(bankAccountAddRequest))
-              .catchError((err) {
-        log(err);
-        _dialogService.showCustomDialog(
-            variant: error, title: 'Error', description: err.toString());
-      });
-      if (bankAccountAddResponse.statusCode == 200) {
-        goToWalletInfo();
-        notifyListeners();
-      } else {
-        showErrDialog(bankAccountAddResponse.statusMessage.toString());
-      }
-    } else {
-      showErrDialog('Account Number & Re-Type Account Number does not Match');
-    }
-  }
+  // Future<void> addBankAccount() async {
+  //   bankAccountAddRequest.createdby = 'user';
+  //   bankAccountAddRequest.createdon = DateTime.now();
+  //   bankAccountAddRequest.id = 0;
+  //   bankAccountAddRequest.isdeleted = 'a';
+  //   bankAccountAddRequest.modifiedby = 'user';
+  //   bankAccountAddRequest.modifiedon = DateTime.now();
+  //   if (bankAccountAddRequest.accNo == confirmacc) {
+  //     final bankAccountAddResponse =
+  //         await runBusyFuture(_apiService.addBank(bankAccountAddRequest))
+  //             .catchError((err) {
+  //       log(err);
+  //       _dialogService.showCustomDialog(
+  //           variant: error, title: 'Error', description: err.toString());
+  //     });
+  //     if (bankAccountAddResponse.statusCode == 200) {
+  //       goToWalletInfo();
+  //       notifyListeners();
+  //     } else {
+  //       showErrDialog(bankAccountAddResponse.statusMessage.toString());
+  //     }
+  //   } else {
+  //     showErrDialog('Account Number & Re-Type Account Number does not Match');
+  //   }
+  // }
 
-  void showErrDialog(String message) {
-    _dialogService.showCustomDialog(
-        variant: DialogType.error, title: "Error", description: message);
-  }
+  // void showErrDialog(String message) {
+  //   _dialogService.showCustomDialog(
+  //       variant: DialogType.error, title: "Error", description: message);
+  // }
 
-  void confirmAcc(String confirmaccNo) {
-    _confirmaccNo = confirmaccNo;
-    notifyListeners();
-  }
+  // void confirmAcc(String confirmaccNo) {
+  //   _confirmaccNo = confirmaccNo;
+  //   notifyListeners();
+  // }
 }

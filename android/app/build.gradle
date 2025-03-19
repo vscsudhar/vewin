@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    // id 'dev.flutter.app_plugin_loader'
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -28,7 +29,7 @@ def keystoreProperties = new Properties()
    }
 android {
     namespace "com.example.vewin"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 35
     ndkVersion flutter.ndkVersion
 
     compileOptions {

@@ -19,9 +19,9 @@ mixin NavigationMixin {
   void goToSales() => _navigationService.navigateTo(Routes.salesView);
   void goToSalesList() => _navigationService.navigateTo(Routes.salesListView);
   void goToAnnouncement(Announcement announcement) => _navigationService.navigateTo(Routes.announcementDescriptionView, arguments: AnnouncementDescriptionViewArguments(announcement: announcement));
-  void goToPan() => _navigationService.navigateTo(Routes.panView);
+  // void goToPan() => _navigationService.navigateTo(Routes.panView);
   void goToHistory() => _navigationService.navigateTo(Routes.historyView);
-  void goToBankAccount() => _navigationService.navigateTo(Routes.bankAccountView);
+  // void goToBankAccount() => _navigationService.navigateTo(Routes.bankAccountView);
   void goToOtpRegister() => _navigationService.navigateTo(Routes.otpView);
   void goToForgotPass() => _navigationService.navigateTo(Routes.forgotPasswordView);
   void goToResetPass() => _navigationService.replaceWith(Routes.resetPasswordView);
